@@ -4,8 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Routing;
+using PaginationTaghelper.Querying;
 
-namespace PaginationTaghelper
+namespace PaginationTaghelper.Pagination
 {
     [HtmlTargetElement("pagination")]
     public class PaginationTagHelper : TagHelper

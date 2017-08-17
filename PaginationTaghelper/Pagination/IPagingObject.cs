@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PaginationTaghelper
+﻿
+namespace PaginationTaghelper.Pagination
 {
     public interface IPagingObject
     {
