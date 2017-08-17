@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginationTaghelper", "PaginationTaghelper\PaginationTaghelper.csproj", "{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0073102E-D74F-4801-B48C-5AEC423952AC}
+	EndGlobalSection
+EndGlobal
