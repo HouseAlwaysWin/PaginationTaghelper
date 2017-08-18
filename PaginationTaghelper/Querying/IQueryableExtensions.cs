@@ -1,5 +1,6 @@
 ﻿using PaginationTaghelper.Pagination;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,13 +9,14 @@ namespace PaginationTaghelper.Querying
 {
     public static class IQueryableExtensions
     {
+
         public static IQueryable<T> ApplySearching<T>(
              this IQueryable<T> query,
              IQueryObject queryObj,
-              Dictionary<string, Expression<Func<T, bool>>> columnsMap)
+             Dictionary<string, Expression<Func<T,bool>>> compareMap)
         {
             if (String.IsNullOrWhiteSpace(queryObj.SearchBy) ||
-              !columnsMap.ContainsKey(queryObj.SearchBy))
+              !compareMap.ContainsKey(queryObj.SearchBy))
             {
                 return query;
             }
@@ -24,13 +26,15 @@ namespace PaginationTaghelper.Querying
                 return query;
             }
 
-            return query = query.Where(columnsMap[queryObj.SearchBy]);
+            query = query.Where(compareMap[queryObj.SearchBy]);
+
+            return query;
         }
 
         public static IQueryable<T> ApplyOrdering<T>(
-            this IQueryable<T> query,
-            IQueryObject queryObj,
-            Dictionary<string, Expression<Func<T, object>>> columnsMap)
+        this IQueryable<T> query,
+        IQueryObject queryObj,
+        Dictionary<string, Expression<Func<T, object>>> columnsMap)
         {
             if (String.IsNullOrWhiteSpace(queryObj.SortBy) ||
                !columnsMap.ContainsKey(queryObj.SortBy))

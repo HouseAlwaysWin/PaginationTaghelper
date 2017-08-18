@@ -92,7 +92,7 @@ namespace PaginationTaghelper.Pagination
 
         public bool ExchangeNextLastBtn { get; set; }
 
-        public bool ActiveSearchPage { get; set; }
+
 
         public override void Process(
             TagHelperContext context, TagHelperOutput output)

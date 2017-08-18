@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PaginationTaghelper", "PaginationTaghelper\PaginationTaghelper.csproj", "{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginationExample", "PaginationExample\PaginationExample.csproj", "{4E4911B5-3F4A-4173-8CE5-D05F9C046063}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PaginationTaghelperExample", "PaginationTaghelperExample\PaginationTaghelperExample.csproj", "{D1B20BBA-B713-41AA-8528-F65FA1F1D089}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C1AD52A5-F5BF-4B31-9B57-CCF36376B09D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E4911B5-3F4A-4173-8CE5-D05F9C046063}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E4911B5-3F4A-4173-8CE5-D05F9C046063}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E4911B5-3F4A-4173-8CE5-D05F9C046063}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E4911B5-3F4A-4173-8CE5-D05F9C046063}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1B20BBA-B713-41AA-8528-F65FA1F1D089}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B20BBA-B713-41AA-8528-F65FA1F1D089}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B20BBA-B713-41AA-8528-F65FA1F1D089}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B20BBA-B713-41AA-8528-F65FA1F1D089}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
