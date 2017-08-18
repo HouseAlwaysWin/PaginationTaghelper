@@ -1,10 +1,18 @@
 # PaginationTaghelper
 
 
+<h2>Installation</h3>
+
+From Package-Manager <strong><em>Install-Package PaginationTaghelper</em></strong>
+<br/>
+From .NET-CLI <strong><em>dotnet add package PaginationTaghelper</em></strong>
+<br/>
+
 <br/>
 <h2>How To Use It</h2>
 
-
+Add <strong><em>@addTagHelper PaginationTaghelper.Pagination.*,PaginationTaghelper</em></strong> to your import _ViewImports.cshtml
+<br/>
 Add pagination tag in your view
 
 <strong> \<pagination\>\</pagination\>
