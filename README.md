@@ -223,4 +223,29 @@ Your Pagination html may look like this with your tag helper attributes
  </tbody>
 </table>
 
+<hr/>
+<h2>PaginationTaghelper offer three IQueryable Extension methods to help you building with pagination
+<table>
+ <thead>
+  <tr>
+   <td><strong>Extension></strong></td>
+   <td><strong>Comment</strong></td>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+  <td><strong>ApplySearching</strong></td>
+   <td>With two parameter,first is your query list,and second is your search map which you must add your custom search method<T></td>
+  </tr>
+  <tr>
+  <td><strong>ApplyOrdering</strong></td>
+   <td>With two parameter,first is your query list,and second is your sorted map</td>
+  </tr>
+  <tr>
+  <td><strong>ApplyPaging</strong></td>
+   <td>With two parameter,first is your query list,and second is your IPagingObject</td>
+  </tr>
+ </tbody>
+</table>
+
 <h3>Please look at PaginationTaghelperExample for more implementation details</h3>
