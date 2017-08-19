@@ -243,7 +243,7 @@ Your Pagination html may look like this with your tag helper attributes
   </tr>
   <tr>
   <td><strong>ApplyPaging</strong></td>
-   <td>With two parameter,first is your query list,and second is your IPagingObject</td>
+   <td>With one parameter IPagingObject</td>
   </tr>
  </tbody>
 </table>
