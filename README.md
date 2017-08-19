@@ -32,7 +32,7 @@ And add attributes to tag
   <tbody>
     <tr>
       <td><strong>query-model</strong></td>
-      <td>This is Instance implement from IQueryObject</td>
+      <td>This is Instance implement from IQueryObject,Must be used whent active-custom-query-options is false</td>
     </tr>
    <tr>
       <td><strong>paging-model</strong></td>
@@ -146,3 +146,5 @@ And add attributes to tag
     </tr>
   </tbody>
 </table>
+<br/>
+For more detail,please look at PaginationTagHelperExample
