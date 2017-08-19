@@ -147,4 +147,35 @@ And add attributes to tag
   </tbody>
 </table>
 <br/>
-For more detail,please look at PaginationTagHelperExample
+
+<hr/>
+
+<h2>PaginationTaghelper offer three interfaces to help you building with pagination</h2>
+<table>
+ <thead>
+  <tr>
+   <td><strong>Interface</strong></td>
+   <td><strong>Comment</strong></td>
+   <td><strong>Properties</strong>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+   <td><strong>IPagingObject</strong></td>
+   <td>For pagination this interface is must be implemented with your view model</td>
+   <td><strong>Page,ItemPerPage</strong></td>
+  </tr>
+<tr>
+   <td><strong>IQueryObject</strong></td>
+   <td>For querying and make your pagination correct page this interface is must be implemented with your view model</td>
+   <td><strong>SearchBy,SearchItem,SortBy,IsSortAscending,ShowAll</strong></td>
+  </tr>
+<tr>
+   <td><strong>IPaginationViewModel<T><Customer></strong></td>
+   <td>This generic abstract class is optional to your output view model,this interface is offering necessary properties to your pagination taghelper  </td>
+   <td><strong>Items,TotalItems,QueryObj,PagingObj,QueryOptions</strong></td>
+  </tr>
+ </tbody>
+</table>
+
+<h3>Please look at PaginationTaghelperExample for more implementing details</h3>
