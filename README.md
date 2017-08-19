@@ -32,11 +32,11 @@ And add attributes to tag
   <tbody>
     <tr>
       <td><strong>query-model</strong></td>
-      <td>This is Instance implement from IQueryObject,Must be used whent active-custom-query-options is false</td>
+      <td>Object has implemented IQueryObject,Must be used when <strong><em>active-custom-query-options"</em> is false</strong></td>
     </tr>
    <tr>
       <td><strong>paging-model</strong></td>
-      <td>This is Instance implement from IPagingObject</td>
+      <td>Object has implemented IPagingObject</td>
     </tr>
     <tr>
       <td><strong>total-items</strong></td>
@@ -123,6 +123,65 @@ And add attributes to tag
     </tr>
   </tbody>
 </table>
+
+
+Your Pagination html may look like this with your tag helper attributes
+```
+<nav>
+    <ul class="<strong>page-style-class</strong>">
+        <li class="disable-class">
+            <a aria-label="Previous">
+                <span aria-hidden="true">previous-icon</span>
+            </a>
+        </li>
+        <li class="disable-class">
+            <a aria-label="First">
+                <span aria-hidden="true">first-icon</span>
+            </a>
+        </li>
+        <li class="activate-class">
+            <a aria-label="1" class="active" href="/?page=1&amp;isSortAscending=False">
+                <span aria-hidden="true">1</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="2" href="/?page=2&amp;isSortAscending=False">
+                <span aria-hidden="true">2</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="3" href="/?page=3&amp;isSortAscending=False">
+                <span aria-hidden="true">3</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="4" href="/?page=4&amp;isSortAscending=False">
+                <span aria-hidden="true">4</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="5" href="/?page=5&amp;isSortAscending=False">
+                <span aria-hidden="true">5</span>
+            </a>
+        </li>
+        <li class="disable-class">
+            <a aria-label="...">
+                <span aria-hidden="true">...</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="Last" href="/?page=17&amp;isSortAscending=False">
+                <span aria-hidden="true">last-icon</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="Next" href="/?page=2&amp;isSortAscending=False">
+                <span aria-hidden="true">next-icon</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+```
 
 <hr/>
 
