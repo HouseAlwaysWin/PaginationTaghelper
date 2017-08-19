@@ -127,8 +127,8 @@ And add attributes to tag
 
 
 Your Pagination html may look like this with your tag helper attributes
-
-```<nav>
+```html
+<nav>
     <ul class="page-style-class">
         <li class="disable-class">
             <a aria-label="previous-icon">
