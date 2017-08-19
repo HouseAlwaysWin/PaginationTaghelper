@@ -1,5 +1,7 @@
 # PaginationTaghelper
-<h2>Only supported Asp.net Core 2.0
+
+<h2>Supported Version</h2>
+Only compatiable Asp.net core 2.0 or above
 
 <h2>Installation</h3>
 
@@ -8,7 +10,6 @@ From Package-Manager <strong><em>Install-Package PaginationTaghelper</em></stron
 From .NET-CLI <strong><em>dotnet add package PaginationTaghelper</em></strong>
 <br/>
 
-<br/>
 <h2>How To Use It</h2>
 
 Add <strong><em>@addTagHelper PaginationTaghelper.Pagination.*,PaginationTaghelper</em></strong> to your import _ViewImports.cshtml
