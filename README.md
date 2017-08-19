@@ -222,4 +222,4 @@ Your Pagination html may look like this with your tag helper attributes
  </tbody>
 </table>
 
-<h3>Please look at PaginationTaghelperExample for more implementing details</h3>
+<h3>Please look at PaginationTaghelperExample for more implementation details</h3>
