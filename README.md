@@ -126,16 +126,16 @@ And add attributes to tag
 
 
 Your Pagination html may look like this with your tag helper attributes
-```
-<nav>
-    <ul class="<strong>page-style-class</strong>">
+
+```<nav>
+    <ul class="page-style-class">
         <li class="disable-class">
-            <a aria-label="Previous">
+            <a aria-label="previous-icon">
                 <span aria-hidden="true">previous-icon</span>
             </a>
         </li>
         <li class="disable-class">
-            <a aria-label="First">
+            <a aria-label="first-icon">
                 <span aria-hidden="true">first-icon</span>
             </a>
         </li>
@@ -149,33 +149,18 @@ Your Pagination html may look like this with your tag helper attributes
                 <span aria-hidden="true">2</span>
             </a>
         </li>
-        <li>
-            <a aria-label="3" href="/?page=3&amp;isSortAscending=False">
-                <span aria-hidden="true">3</span>
-            </a>
-        </li>
-        <li>
-            <a aria-label="4" href="/?page=4&amp;isSortAscending=False">
-                <span aria-hidden="true">4</span>
-            </a>
-        </li>
-        <li>
-            <a aria-label="5" href="/?page=5&amp;isSortAscending=False">
-                <span aria-hidden="true">5</span>
-            </a>
-        </li>
         <li class="disable-class">
-            <a aria-label="...">
-                <span aria-hidden="true">...</span>
+            <a aria-label="between-icon">
+                <span aria-hidden="true">between-icon</span>
             </a>
         </li>
         <li>
-            <a aria-label="Last" href="/?page=17&amp;isSortAscending=False">
+            <a aria-label="last-icon" href="/?page=17&amp;isSortAscending=False">
                 <span aria-hidden="true">last-icon</span>
             </a>
         </li>
         <li>
-            <a aria-label="Next" href="/?page=2&amp;isSortAscending=False">
+            <a aria-label="next-icon" href="/?page=2&amp;isSortAscending=False">
                 <span aria-hidden="true">next-icon</span>
             </a>
         </li>
