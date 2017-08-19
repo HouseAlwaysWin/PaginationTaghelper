@@ -224,7 +224,7 @@ Your Pagination html may look like this with your tag helper attributes
 </table>
 
 <hr/>
-<h2>PaginationTaghelper offer three IQueryable Extension methods to help you building with pagination
+<h2>PaginationTaghelper offer three IQueryable Extension methods to help you building with pagination</h2>
 <table>
  <thead>
   <tr>
