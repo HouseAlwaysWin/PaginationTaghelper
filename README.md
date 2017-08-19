@@ -1,5 +1,5 @@
 # PaginationTaghelper
-
+<h2>Only supported Asp.net Core 2.0
 
 <h2>Installation</h3>
 
