@@ -75,11 +75,11 @@ And add attributes to tag
     </tr>
     <tr>
       <td><strong>page-middle-length</strong></td>
-      <td>Show page length between current page,for example PageMiddleLength is 2 and current page is 7 then it will show 5 6 7 8 9 pages ,<strong>the default value is <em>2</em></strong></td>
+      <td>Show page length with current page left and right,for example PageMiddleLength is 2 and current page is 7 then it will show 5 6 7 8 9 pages ,<strong>the default value is <em>2</em></strong></td>
     </tr>
     <tr>
       <td><strong>page-top-bottom-length</strong></td>
-      <td>Show page length first page and last page length,for example PageTopBottomLength is 5 and current page is 1 then it will show 1 2 3 4 5 pages ,<strong>the default value is <em>5</em></strong></td>
+      <td>Show page length with bottom page and top page length,for example PageTopBottomLength is 5 and current page is 1 then it will show 1 2 3 4 5 pages ,<strong>the default value is <em>5</em></strong></td>
     </tr>
     <tr>
       <td><strong>previous-icon</strong></td>
