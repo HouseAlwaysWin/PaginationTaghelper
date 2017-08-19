@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Routing;
 using PaginationTaghelper.Querying;
+using System.Collections.Generic;
 
 namespace PaginationTaghelper.Pagination
 {
@@ -42,6 +43,7 @@ namespace PaginationTaghelper.Pagination
         public bool ActiveCustomQueryOptions { get; set; } = false;
 
         public dynamic QueryOptions { get; set; }
+
 
         public int TotalItems { get; set; }
 
@@ -332,11 +334,11 @@ namespace PaginationTaghelper.Pagination
         {
             if (ActiveCustomQueryOptions)
             {
-                // custom query link
+                //// custom query link
                 QueryOptions.page = page_action;
 
                 a.Attributes["href"] = urlHelper.Action(
-                    PageAction, (object)QueryOptions);
+                PageAction, (object)QueryOptions);
             }
             else
             {

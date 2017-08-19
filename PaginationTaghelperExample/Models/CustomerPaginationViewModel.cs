@@ -8,12 +8,8 @@ using System.Threading.Tasks;
 
 namespace PaginationTaghelperExample.Models
 {
-    public class CustomerPaginationViewModel<T>
+    public class CustomerPaginationViewModel : IPaginationViewModel<Customer>
     {
-        public IEnumerable<T> Items { get; set; }
-        public int TotalItems { get; set; }
-        public IQueryObject QueryObj { get; set; }
-        public IPagingObject PagingObj { get; set; }
-        public ExpandoObject QueryOption { get; set; }
+       
     }
 }

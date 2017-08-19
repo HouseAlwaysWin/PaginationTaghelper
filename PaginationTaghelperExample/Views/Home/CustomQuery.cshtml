@@ -1,10 +1,8 @@
-﻿@model CustomerPaginationViewModel<Customer>
+﻿@model CustomerPaginationViewModel
 
 <br />
 
-
-
-<form asp-controller="Home" asp-action="Index" method="get">
+<form asp-controller="Home" asp-action="CustomQuery" method="get">
     <div class="input-group">
         <select name="searchby" class="selectpicker" data-width="5%" data-style="btn-success">
             <option value="Id">Id</option>
@@ -21,14 +19,15 @@
 
 
 <br />
-<pagination query-model="@Model.QueryObj"
-            paging-model="@Model.PagingObj"
+<pagination paging-model="@Model.PagingObj"
             total-items="@Model.TotalItems"
-            page-action="Index">
+            active-custom-query-options="true"
+            query-options="@Model.QueryOptions"
+            page-action="CustomQuery">
 </pagination>
 
 <div class="bg-primary panel-body">
-    <h4>Users Accounts</h4>
+    <h4>Customers</h4>
     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
 </div>
 
@@ -39,7 +38,7 @@
                 Id
                 @if (!Model.QueryObj.IsSortAscending)
                 {
-                    <a href="@Url.Action("Index",
+                    <a href="@Url.Action("CustomQuery",
                                                      new
                                                      {
                                                          page = Model.PagingObj.Page,
@@ -54,7 +53,7 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("Index",
+                    <a href="@Url.Action("CustomQuery",
                                 new
                                 {
                                     page = Model.PagingObj.Page,
@@ -72,7 +71,7 @@
                 Name
                 @if (!Model.QueryObj.IsSortAscending)
                 {
-                    <a href="@Url.Action("Index",
+                    <a href="@Url.Action("CustomQuery",
                                                   new
                                                   {
                                                       page = Model.PagingObj.Page,
@@ -86,7 +85,7 @@
                 }
                 else
                 {
-                    <a href="@Url.Action("Index", new
+                    <a href="@Url.Action("CustomQuery", new
                             {
                                 page = Model.PagingObj.Page,
                                 sortby = "Name",
@@ -125,12 +124,13 @@
     </tbody>
 </table>
 
-<a href="@Url.Action("Index", new { showall = true })" class="btn btn-primary">Show All Users</a>
+<a href="@Url.Action("CustomQuery", new { showall = true })" class="btn btn-primary">Show All Users</a>
 
 
 
-<pagination query-model="@Model.QueryObj"
-            paging-model="@Model.PagingObj"
+<pagination paging-model="@Model.PagingObj"
             total-items="@Model.TotalItems"
-            page-action="Index">
+            active-custom-query-options="true"
+            query-options="@Model.QueryOptions"
+            page-action="CustomQuery">
 </pagination>
