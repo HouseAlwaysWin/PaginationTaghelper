@@ -15,9 +15,10 @@ From .NET-CLI <strong><em>dotnet add package PaginationTaghelper</em></strong>
 Add <strong><em>@addTagHelper PaginationTaghelper.Pagination.*,PaginationTaghelper</em></strong> to your import _ViewImports.cshtml
 <br/>
 Add pagination tag in your view
+``` html
+<pagination></pagination>
 
-<strong> \<pagination\>\</pagination\>
-</strong>
+```
 <hr/>
 
 And add attributes to tag
@@ -49,6 +50,15 @@ And add attributes to tag
     </tr>
   </tbody>
 </table>
+<br/>
+
+```html
+<pagination query-model="@Model.QueryObj"
+            paging-model="@Model.PagingObj"
+            total-items="@Model.TotalItems"
+            page-action="your current view action">
+</pagination>
+```
 
 <hr/>
 
@@ -125,44 +135,92 @@ And add attributes to tag
   </tbody>
 </table>
 
+<br/>
+<h3>Pagination tag with all attributes</h3>
 
-Your Pagination html may look like this with your tag helper attributes
+```html
+<pagination query-model="@Model.QueryObj"
+            paging-model="@Model.PagingObj"
+            total-items="@Model.TotalItems"
+            page-action="your current view action"
+            page-style-class="pagination" //default
+            activate-class="active"       //default
+            disable-class="disabled"      //default 
+            page-middle-length="2"        //default
+            page-top-bottom-length="5"    //default
+            previous-icon="Previous"      //default
+            next-icon="Next"              //default
+            first-icon="First"            //default
+            last-icon="Last"              //default
+            show-first-page="true"        //default
+            show-last-page="true"         //default
+            between-icon="..."            //default
+            show-between-icon="true"      //default
+            exchange-previous-first-btn="false" //default
+            exchange-next-last-btn="false" //default 
+            >
+</pagination>
+```
+
+
+Your pagination tag will generate html like this...
+
 ```html
 <nav>
-    <ul class="page-style-class">
-        <li class="disable-class">
-            <a aria-label="previous-icon">
-                <span aria-hidden="true">previous-icon</span>
-            </a>
-        </li>
-        <li class="disable-class">
-            <a aria-label="first-icon">
-                <span aria-hidden="true">first-icon</span>
-            </a>
-        </li>
-        <li class="activate-class">
-            <a aria-label="1" class="active" href="/?page=1&amp;isSortAscending=False">
-                <span aria-hidden="true">1</span>
+    <ul class="pagination"> // page-style-class
+        <li>
+            <a aria-label="Previous"> // previous-icon
+                <span aria-hidden="true">Previous</span> // previous-icon
             </a>
         </li>
         <li>
-            <a aria-label="2" href="/?page=2&amp;isSortAscending=False">
-                <span aria-hidden="true">2</span>
+            <a aria-label="First"> // first-icon
+                <span aria-hidden="true">First</span> // first-icon
             </a>
         </li>
-        <li class="disable-class">
-            <a aria-label="between-icon">
-                <span aria-hidden="true">between-icon</span>
+         <li>
+            <a aria-label="..." href="/?page=17&amp;isSortAscending=False"> // between-icon
+                <span aria-hidden="true">...</span> // between-icon
+            </a>
+        </li>
+        <li class="activate"> // activate-class
+            <a aria-label="5" class="active" href="/?page=5&amp;isSortAscending=False"> // activate-class
+                <span aria-hidden="true">5</span>
             </a>
         </li>
         <li>
-            <a aria-label="last-icon" href="/?page=17&amp;isSortAscending=False">
-                <span aria-hidden="true">last-icon</span>
+            <a aria-label="6" href="/?page=6&amp;isSortAscending=False">
+                <span aria-hidden="true">6</span>
+            </a>
+        </li>
+         <li>
+            <a aria-label="7" href="/?page=7&amp;isSortAscending=False">
+                <span aria-hidden="true">7</span>
+            </a>
+        </li>
+         <li>
+            <a aria-label="8" href="/?page=8&amp;isSortAscending=False">
+                <span aria-hidden="true">8</span>
+            </a>
+        </li>
+         <li>
+            <a aria-label="9" href="/?page=9&amp;isSortAscending=False">
+                <span aria-hidden="true">9</span>
+            </a>
+        </li>
+        <li> 
+            <a aria-label="..."> // between-icon
+                <span aria-hidden="true">...</span> // between-icon
             </a>
         </li>
         <li>
-            <a aria-label="next-icon" href="/?page=2&amp;isSortAscending=False">
-                <span aria-hidden="true">next-icon</span>
+            <a aria-label="last-icon" href="/?page=17&amp;isSortAscending=False"> // last-icon
+                <span aria-hidden="true">Last</span> // last-icon
+            </a>
+        </li>
+        <li>
+            <a aria-label="next-icon" href="/?page=2&amp;isSortAscending=False"> // next-icon
+                <span aria-hidden="true">Next</span> // next-icon
             </a>
         </li>
     </ul>
@@ -192,6 +250,17 @@ Your Pagination html may look like this with your tag helper attributes
   </tbody>
 </table>
 <br/>
+
+<h3>Custom query attribue with pagination tag</h3>
+
+```html
+<pagination paging-model="@Model.PagingObj"
+            total-items="@Model.TotalItems"
+            active-custom-query-options="true" // must be true
+            query-options="@Model.QueryOptions"
+            page-action="CustomQuery">
+</pagination>
+```
 
 <hr/>
 
