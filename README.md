@@ -68,7 +68,7 @@ And add attributes to tag
   <thead>
     <tr>
       <td><strong>Attribute</strong></td>
-      <td><strong>Comment<strong></td>
+      <td><strong>Description<strong></td>
     </tr>
   </thead>
   <tbody>
@@ -235,7 +235,7 @@ Your pagination tag will generate html like this...
   <thead>
     <tr>
       <td><strong>Attribute</strong></td>
-      <td><strong>Comment</strong></td>
+      <td><strong>Description</strong></td>
     </tr>
   </thead>
   <tbody>
