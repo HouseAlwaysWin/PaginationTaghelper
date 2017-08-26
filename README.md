@@ -1,8 +1,7 @@
 # PaginationTaghelper
 
-<h2>Supported Version</h2>
-Only compatiable Asp.net core 2.0 or above
-
+<h2>Requisition</h2>
+Asp.Net Core 1.0 or above
 <h2>Installation</h3>
 
 From Package-Manager <strong><em>Install-Package PaginationTaghelper</em></strong>
