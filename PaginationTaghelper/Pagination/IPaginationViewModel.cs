@@ -12,6 +12,6 @@ namespace PaginationTagHelper.Pagination
         public int TotalItems { get; set; }
         public IQueryObject QueryObj { get; set; }
         public IPagingObject PagingObj { get; set; }
-        public Dictionary<string,string> QueryOptions { get; set; }
+        public string QueryOptions { get; set; }
     }
 }

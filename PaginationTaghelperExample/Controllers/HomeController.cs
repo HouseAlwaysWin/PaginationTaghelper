@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using PaginationTaghelperExample.Models;
 using PaginationTaghelperExample.Data;
 using System.Dynamic;
+using Newtonsoft.Json;
 
 namespace PaginationTaghelperExample.Controllers
 {
@@ -109,8 +110,13 @@ namespace PaginationTaghelperExample.Controllers
 
             Dictionary<string, string> queryOptions = new Dictionary<string, string>
             {
+                ["SearchItem"]=model.SearchItem,
+                ["SearchBy"]=model.SearchBy,
+                ["SortBy"] = model.SortBy,
                 ["IsSortAscending"] = model.IsSortAscending.ToString()
             };
+
+            var queryList = JsonConvert.SerializeObject(queryOptions);
 
             query = query.ApplyPaging(model);
 
@@ -120,7 +126,7 @@ namespace PaginationTaghelperExample.Controllers
                 TotalItems = totalItems,
                 PagingObj = model,
                 QueryObj = model,
-                QueryOptions = queryOptions
+                QueryOptions = queryList
             };
 
             return View(result);

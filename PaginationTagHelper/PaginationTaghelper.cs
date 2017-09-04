@@ -348,23 +348,29 @@ namespace PaginationTagHelper
             TagBuilder a,
             int page_action)
         {
-            if (String.IsNullOrEmpty(PageController))
+            if (String.IsNullOrWhiteSpace(PageController))
             {
+                if (!String.IsNullOrEmpty(PageQueryList))
+                {
+                    foreach (var item in QueryOptions)
+                    {
+                        QueryListDict[item.Key] = item.Value;
+                    }
+                }
+
                 QueryListDict[CurrentPageParameter] = page_action.ToString();
                 a.Attributes["href"] = urlHelper.Action(
-                     PageAction, new { page = page_action });
+                     PageAction, QueryListDict);
             }
             else
             {
 
                 if (!String.IsNullOrEmpty(PageQueryList))
                 {
-
                     foreach (var item in QueryOptions)
                     {
                         QueryListDict[item.Key] = item.Value;
                     }
-
                 }
 
                 QueryListDict[CurrentPageParameter] = page_action.ToString();

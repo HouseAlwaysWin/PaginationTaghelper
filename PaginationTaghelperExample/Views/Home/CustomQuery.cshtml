@@ -20,13 +20,7 @@
 
 <br />
 
-<pagination paging-model="@Model.PagingObj"
-            total-items="@Model.TotalItems"
-            active-custom-query-options="true"
-            query-options="@Model.QueryOptions"
-            page-action="CustomQuery"
-            attributes-validation-summary="test">
-</pagination>
+
 
 <div class="bg-primary panel-body">
     <h4>Customers</h4>
@@ -47,7 +41,7 @@
                                                          searchby = Model.QueryObj.SearchBy,
                                                          searchItem= Model.QueryObj.SearchItem,
                                                          sortby = "Id",
-                                                         IsSortAscending = true
+                                                         IsSortAscending =true
                                                      })">
 
                         <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
@@ -62,7 +56,7 @@
                                     searchby = Model.QueryObj.SearchBy,
                                     searchItem = Model.QueryObj.SearchItem,
                                     sortby = "Id",
-                                    IsSortAscending = false
+                                    IsSortAscending =false
                                 })">
 
                         <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
@@ -136,5 +130,6 @@
             total-items="@Model.TotalItems"
             active-custom-query-options="true"
             page-query-list="@Model.QueryOptions"
-            page-action="CustomQuery">
+            page-action="CustomQuery"
+            page-controller="Home">
 </pagination>
