@@ -4,10 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Routing;
-using PaginationTaghelper.Querying;
 using System.Collections.Generic;
+using GenericTagHelper.MethodHelpers;
+using PaginationTagHelper.Pagination;
 
-namespace PaginationTaghelper.Pagination
+namespace PaginationTagHelper
 {
     [HtmlTargetElement("pagination")]
     public class PaginationTagHelper : TagHelper
@@ -21,7 +22,7 @@ namespace PaginationTaghelper.Pagination
         }
 
         [HtmlAttributeNotBound]
-        private IUrlHelper urlHelper
+        public IUrlHelper urlHelper
         {
             get
             {
@@ -29,25 +30,21 @@ namespace PaginationTaghelper.Pagination
             }
         }
 
+
         // Get Current ViewContext
         [ViewContext]
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
 
+        public string AttributesValidationSummary { get; set; }
 
         /*-----------------------Must Be Fullfill-------------------------*/
-        public IQueryObject QueryModel { get; set; }
-
         public IPagingObject PagingModel { get; set; }
 
         public bool ActiveCustomQueryOptions { get; set; } = false;
 
-        public dynamic QueryOptions { get; set; }
-
-
         public int TotalItems { get; set; }
 
-        [HtmlAttributeNotBound]
         private int TotalPages
         {
             get
@@ -61,38 +58,57 @@ namespace PaginationTaghelper.Pagination
             }
         }
 
-        public string PageAction { get; set; }
+        public string CurrentPageParameter { get; set; } = "page";
 
-        /*-----------------------Options-------------------------*/
+        public string PageQueryList { get; set; }
+
+        private Dictionary<string, string> QueryOptions
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(PageQueryList);
+            }
+        }
+        private Dictionary<string, string> QueryListDict { get; set; } = new Dictionary<string, string>();
+
+
+        public bool ActiveQueryOptions { get; set; }
+
+        public string PageAction { get; set; } = "";
+
+        public string PageController { get; set; } = "";
+
         public string PageStyleClass { get; set; } = "pagination";
 
-        public string ActivateClass { get; set; } = "active";
+        public string PageActiveClass { get; set; } = "active";
 
-        public string DisableClass { get; set; } = "disabled";
+        public string PageDisableClass { get; set; } = "disabled";
 
         public int PageMiddleLength { get; set; } = 2;
 
         public int PageTopBottomLength { get; set; } = 5;
 
-        public string PreviousIcon { get; set; } = "Previous";
+        public string PagePreviousIcon { get; set; } = "Previous";
 
-        public string NextIcon { get; set; } = "Next";
+        public string PageNextIcon { get; set; } = "Next";
 
-        public string FirstIcon { get; set; } = "First";
+        public string PageFirstIcon { get; set; } = "First";
 
-        public string LastIcon { get; set; } = "Last";
+        public string PageLastIcon { get; set; } = "Last";
 
-        public bool ShowFirstPage { get; set; } = true;
+        public bool PageShowFirst { get; set; } = true;
 
-        public bool ShowLastPage { get; set; } = true;
+        public bool PageShowLast { get; set; } = true;
 
-        public string BetweenIcon { get; set; } = "...";
+        public string PageBetweenIcon { get; set; } = "...";
 
-        public bool ShowBetweenIcon { get; set; } = true;
+        public bool PageShowBetweenIcon { get; set; } = true;
 
-        public bool ExchangePreviousFirstBtn { get; set; }
+        public bool PageExchangePreviousFirstBtn { get; set; }
 
-        public bool ExchangeNextLastBtn { get; set; }
+        public bool PageExchangeNextLastBtn { get; set; }
+
+        public bool ActivePagination { get; set; }
 
 
 
@@ -122,31 +138,31 @@ namespace PaginationTaghelper.Pagination
                 TagBuilder first_li = PageButton(
                     has_link: PagingModel.Page > 1,
                     page_action: i,
-                    icon: FirstIcon,
+                    icon: PageFirstIcon,
                     is_disabled: PagingModel.Page == 1,
                     active_page: false);
 
                 TagBuilder last_li = PageButton(
                     has_link: PagingModel.Page < TotalPages,
                     page_action: i,
-                    icon: LastIcon,
+                    icon: PageLastIcon,
                     is_disabled: PagingModel.Page == TotalPages,
                     active_page: false);
 
                 TagBuilder dot_li = PageButton(
                     has_link: false,
                     page_action: i,
-                    icon: BetweenIcon,
+                    icon: PageBetweenIcon,
                     is_disabled: true,
                     active_page: false);
 
                 /*-----------------------Show First and Previous Page Button-------------------------*/
 
                 // Show previous and first btn in different location
-                if (ExchangePreviousFirstBtn)
+                if (PageExchangePreviousFirstBtn)
                 {
                     // Show First Page Btn
-                    if (i == 1 && ShowFirstPage)
+                    if (i == 1 && PageShowFirst)
                     {
                         ul.InnerHtml.AppendHtml(first_li);
                     }
@@ -157,7 +173,7 @@ namespace PaginationTaghelper.Pagination
                         var pre_li = PageButton(
                             has_link: (PagingModel.Page - 1) >= 1,
                             page_action: PagingModel.Page - 1,
-                            icon: PreviousIcon,
+                            icon: PagePreviousIcon,
                             is_disabled: PagingModel.Page == 1,
                             active_page: false);
 
@@ -166,7 +182,7 @@ namespace PaginationTaghelper.Pagination
                         // TotalPage can't be same as PageMiddleLength 
                         if (PagingModel.Page > PageMiddleLength + 1 &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
-                            ShowBetweenIcon)
+                            PageShowBetweenIcon)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -180,7 +196,7 @@ namespace PaginationTaghelper.Pagination
                         var pre_li = PageButton(
                             has_link: (PagingModel.Page - 1) >= 1,
                             page_action: PagingModel.Page - 1,
-                            icon: PreviousIcon,
+                            icon: PagePreviousIcon,
                             is_disabled: PagingModel.Page == 1,
                             active_page: false);
 
@@ -188,13 +204,13 @@ namespace PaginationTaghelper.Pagination
                     }
 
                     // Show First Page
-                    if (i == 1 && ShowFirstPage)
+                    if (i == 1 && PageShowFirst)
                     {
                         ul.InnerHtml.AppendHtml(first_li);
                         // if current page is bigger than 3 
                         if (PagingModel.Page > PageMiddleLength + 1 &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
-                            ShowBetweenIcon)
+                            PageShowBetweenIcon)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -245,7 +261,7 @@ namespace PaginationTaghelper.Pagination
                 /*-----------------------Show Next And Last Page Button-------------------------*/
 
 
-                if (ExchangeNextLastBtn)
+                if (PageExchangeNextLastBtn)
                 {
                     // Show Next Page Btn 
                     if (i == TotalPages)
@@ -253,13 +269,13 @@ namespace PaginationTaghelper.Pagination
                         var next_li = PageButton(
                             has_link: (PagingModel.Page + 1) <= TotalPages,
                             page_action: PagingModel.Page + 1,
-                            icon: NextIcon,
+                            icon: PageNextIcon,
                             is_disabled: PagingModel.Page == TotalPages,
                             active_page: false);
                         // if current page is smaller than total page minus five 
                         if ((PagingModel.Page < TotalPages - PageMiddleLength) &&
                             TotalPages > (1 + PageMiddleLength * 2)
-                            && ShowBetweenIcon)
+                            && PageShowBetweenIcon)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -268,7 +284,7 @@ namespace PaginationTaghelper.Pagination
                     }
 
                     // Show Last Page Btn
-                    if (i == TotalPages && ShowLastPage)
+                    if (i == TotalPages && PageShowLast)
                     {
                         ul.InnerHtml.AppendHtml(last_li);
                     }
@@ -277,12 +293,12 @@ namespace PaginationTaghelper.Pagination
                 else
                 {
                     // Show Last Page Btn
-                    if (i == TotalPages && ShowLastPage)
+                    if (i == TotalPages && PageShowLast)
                     {
                         // if current page is smaller than total page minus five 
                         if ((PagingModel.Page < TotalPages - PageMiddleLength) &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
-                            ShowBetweenIcon)
+                            PageShowBetweenIcon)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -296,7 +312,7 @@ namespace PaginationTaghelper.Pagination
                         var next_li = PageButton(
                             has_link: (PagingModel.Page + 1) <= TotalPages,
                             page_action: PagingModel.Page + 1,
-                            icon: NextIcon,
+                            icon: PageNextIcon,
                             is_disabled: PagingModel.Page == TotalPages,
                             active_page: false);
 
@@ -332,27 +348,31 @@ namespace PaginationTaghelper.Pagination
             TagBuilder a,
             int page_action)
         {
-            if (ActiveCustomQueryOptions)
+            if (String.IsNullOrEmpty(PageController))
             {
-                //// custom query link
-                QueryOptions.page = page_action;
-
+                QueryListDict[CurrentPageParameter] = page_action.ToString();
                 a.Attributes["href"] = urlHelper.Action(
-                PageAction, (object)QueryOptions);
+                     PageAction, new { page = page_action });
             }
             else
             {
-                // default query link
+
+                if (!String.IsNullOrEmpty(PageQueryList))
+                {
+
+                    foreach (var item in QueryOptions)
+                    {
+                        QueryListDict[item.Key] = item.Value;
+                    }
+
+                }
+
+                QueryListDict[CurrentPageParameter] = page_action.ToString();
                 a.Attributes["href"] = urlHelper.Action(
-                     PageAction, new
-                     {
-                         page = page_action,
-                         searchby = QueryModel.SearchBy,
-                         searchItem = QueryModel.SearchItem,
-                         sortby = QueryModel.SortBy,
-                         isSortAscending = QueryModel.IsSortAscending
-                     });
+                                     PageAction, PageController,
+                                     QueryListDict);
             }
+
 
 
             return a;
@@ -386,13 +406,13 @@ namespace PaginationTaghelper.Pagination
 
             if (is_disabled)
             {
-                li.AddCssClass(DisableClass);
+                li.AddCssClass(PageDisableClass);
             }
 
             if (active_page)
             {
-                a.AddCssClass(ActivateClass);
-                li.AddCssClass(ActivateClass);
+                a.AddCssClass(PageActiveClass);
+                li.AddCssClass(PageActiveClass);
             }
 
             return li;

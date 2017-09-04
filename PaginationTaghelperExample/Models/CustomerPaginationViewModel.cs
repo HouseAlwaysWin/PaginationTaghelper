@@ -1,5 +1,4 @@
-﻿using PaginationTaghelper.Pagination;
-using PaginationTaghelper.Querying;
+﻿using PaginationTagHelper.Pagination;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;

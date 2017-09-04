@@ -4,9 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
-
+using PaginationTagHelper.Querying;
 using Microsoft.AspNetCore.Authorization;
-using PaginationTaghelper.Querying;
 using PaginationTaghelperExample.Models;
 using PaginationTaghelperExample.Data;
 using System.Dynamic;
@@ -102,11 +101,16 @@ namespace PaginationTaghelperExample.Controllers
 
             // Add more query options with dynamic binding
             // To keep paging action correct
-            dynamic queryOptions = new ExpandoObject();
+            //dynamic queryOptions = new ExpandoObject();
 
-            queryOptions.searchby = model.SearchBy;
-            queryOptions.searchItem = model.SearchItem;
-            queryOptions.IsSortAscending = model.IsSortAscending;
+            //queryOptions.searchby = model.SearchBy;
+            //queryOptions.searchItem = model.SearchItem;
+            //queryOptions.IsSortAscending = model.IsSortAscending;
+
+            Dictionary<string, string> queryOptions = new Dictionary<string, string>
+            {
+                ["IsSortAscending"] = model.IsSortAscending.ToString()
+            };
 
             query = query.ApplyPaging(model);
 

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PaginationTaghelper\PaginationTaghelper.csproj" />
+    <ProjectReference Include="..\PaginationTagHelper\PaginationTagHelper.csproj" />
   </ItemGroup>
 
   <ItemGroup>

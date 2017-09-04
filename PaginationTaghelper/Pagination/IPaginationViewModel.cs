@@ -1,10 +1,10 @@
-﻿using PaginationTaghelper.Querying;
+﻿using PaginationTagHelper.Querying;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
 
-namespace PaginationTaghelper.Pagination
+namespace PaginationTagHelper.Pagination
 {
     public abstract class IPaginationViewModel<T>
     {
@@ -12,6 +12,6 @@ namespace PaginationTaghelper.Pagination
         public int TotalItems { get; set; }
         public IQueryObject QueryObj { get; set; }
         public IPagingObject PagingObj { get; set; }
-        public ExpandoObject QueryOptions { get; set; }
+        public Dictionary<string,string> QueryOptions { get; set; }
     }
 }

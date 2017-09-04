@@ -19,11 +19,13 @@
 
 
 <br />
+
 <pagination paging-model="@Model.PagingObj"
             total-items="@Model.TotalItems"
             active-custom-query-options="true"
             query-options="@Model.QueryOptions"
-            page-action="CustomQuery">
+            page-action="CustomQuery"
+            attributes-validation-summary="test">
 </pagination>
 
 <div class="bg-primary panel-body">
@@ -104,9 +106,11 @@
         @if (Model.TotalItems == 0)
             {
             <tr>
-                <h1>
-                    No Customer Found
-                </h1>
+                <td>
+                    <h1>
+                        No Customer Found
+                    </h1>
+                </td>
             </tr>
         }
         else
@@ -131,6 +135,6 @@
 <pagination paging-model="@Model.PagingObj"
             total-items="@Model.TotalItems"
             active-custom-query-options="true"
-            query-options="@Model.QueryOptions"
+            page-query-list="@Model.QueryOptions"
             page-action="CustomQuery">
 </pagination>

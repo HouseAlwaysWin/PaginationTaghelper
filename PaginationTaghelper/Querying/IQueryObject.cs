@@ -1,4 +1,4 @@
-﻿namespace PaginationTaghelper.Querying
+﻿namespace PaginationTagHelper.Querying
 {
     public interface IQueryObject
     {

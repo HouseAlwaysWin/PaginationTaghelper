@@ -1,5 +1,5 @@
-﻿using PaginationTaghelper.Pagination;
-using PaginationTaghelper.Querying;
+﻿using PaginationTagHelper.Pagination;
+using PaginationTagHelper.Querying;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PaginationTaghelperExample.Models
 {
-    public class CustomerViewModel : IQueryObject,IPagingObject
+    public class CustomerViewModel : IQueryObject, IPagingObject
     {
         public string SearchBy { get; set; }
         public string SearchItem { get; set; }

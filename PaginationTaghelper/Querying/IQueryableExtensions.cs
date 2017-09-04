@@ -1,11 +1,11 @@
-﻿using PaginationTaghelper.Pagination;
+﻿using PaginationTagHelper.Pagination;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace PaginationTaghelper.Querying
+namespace PaginationTagHelper.Querying
 {
     public static class IQueryableExtensions
     {

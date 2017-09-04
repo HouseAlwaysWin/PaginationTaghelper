@@ -1,5 +1,5 @@
 ﻿
-namespace PaginationTaghelper.Pagination
+namespace PaginationTagHelper.Pagination
 {
     public interface IPagingObject
     {
