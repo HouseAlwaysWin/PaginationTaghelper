@@ -1,6 +1,7 @@
 # PaginationTaghelper
 
-
+<h2>Requisition</h2>
+Asp.Net Core 1.0 or above
 <h2>Installation</h3>
 
 From Package-Manager <strong><em>Install-Package PaginationTaghelper</em></strong>
@@ -8,15 +9,15 @@ From Package-Manager <strong><em>Install-Package PaginationTaghelper</em></stron
 From .NET-CLI <strong><em>dotnet add package PaginationTaghelper</em></strong>
 <br/>
 
-<br/>
 <h2>How To Use It</h2>
 
 Add <strong><em>@addTagHelper PaginationTaghelper.Pagination.*,PaginationTaghelper</em></strong> to your import _ViewImports.cshtml
 <br/>
 Add pagination tag in your view
+``` html
+<pagination></pagination>
 
-<strong> \<pagination\>\</pagination\>
-</strong>
+```
 <hr/>
 
 And add attributes to tag
@@ -32,11 +33,11 @@ And add attributes to tag
   <tbody>
     <tr>
       <td><strong>query-model</strong></td>
-      <td>This is Instance implement from IQueryObject,Must be used whent active-custom-query-options is false</td>
+      <td>Object has implemented IQueryObject,Must be used when <strong><em>active-custom-query-options"</em> is false</strong></td>
     </tr>
    <tr>
       <td><strong>paging-model</strong></td>
-      <td>This is Instance implement from IPagingObject</td>
+      <td>Object has implemented IPagingObject</td>
     </tr>
     <tr>
       <td><strong>total-items</strong></td>
@@ -48,6 +49,15 @@ And add attributes to tag
     </tr>
   </tbody>
 </table>
+<br/>
+
+```html
+<pagination query-model="@Model.QueryObj"
+            paging-model="@Model.PagingObj"
+            total-items="@Model.TotalItems"
+            page-action="your current view action">
+</pagination>
+```
 
 <hr/>
 
@@ -57,7 +67,7 @@ And add attributes to tag
   <thead>
     <tr>
       <td><strong>Attribute</strong></td>
-      <td><strong>Comment<strong></td>
+      <td><strong>Description<strong></td>
     </tr>
   </thead>
   <tbody>
@@ -75,11 +85,11 @@ And add attributes to tag
     </tr>
     <tr>
       <td><strong>page-middle-length</strong></td>
-      <td>Show page length between current page,for example PageMiddleLength is 2 and current page is 7 then it will show 5 6 7 8 9 pages ,<strong>the default value is <em>2</em></strong></td>
+      <td>Show page length with current page left and right,for example PageMiddleLength is 2 and current page is 7 then it will show 5 6 7 8 9 pages ,<strong>the default value is <em>2</em></strong></td>
     </tr>
     <tr>
       <td><strong>page-top-bottom-length</strong></td>
-      <td>Show page length first page and last page length,for example PageTopBottomLength is 5 and current page is 1 then it will show 1 2 3 4 5 pages ,<strong>the default value is <em>5</em></strong></td>
+      <td>Show page length with bottom page and top page length,for example PageTopBottomLength is 5 and current page is 1 then it will show 1 2 3 4 5 pages ,<strong>the default value is <em>5</em></strong></td>
     </tr>
     <tr>
       <td><strong>previous-icon</strong></td>
@@ -124,6 +134,98 @@ And add attributes to tag
   </tbody>
 </table>
 
+<br/>
+<h3>Pagination tag with all attributes</h3>
+
+```html
+<pagination query-model="@Model.QueryObj"
+            paging-model="@Model.PagingObj"
+            total-items="@Model.TotalItems"
+            page-action="your current view action"
+            page-style-class="pagination" //default
+            activate-class="active"       //default
+            disable-class="disabled"      //default 
+            page-middle-length="2"        //default
+            page-top-bottom-length="5"    //default
+            previous-icon="Previous"      //default
+            next-icon="Next"              //default
+            first-icon="First"            //default
+            last-icon="Last"              //default
+            show-first-page="true"        //default
+            show-last-page="true"         //default
+            between-icon="..."            //default
+            show-between-icon="true"      //default
+            exchange-previous-first-btn="false" //default
+            exchange-next-last-btn="false" //default 
+            >
+</pagination>
+```
+
+
+Your pagination tag will generate html like this...
+
+```html
+<nav>
+    <ul class="pagination"> // page-style-class
+        <li>
+            <a aria-label="Previous"> // previous-icon
+                <span aria-hidden="true">Previous</span> // previous-icon
+            </a>
+        </li>
+        <li>
+            <a aria-label="First"> // first-icon
+                <span aria-hidden="true">First</span> // first-icon
+            </a>
+        </li>
+         <li>
+            <a aria-label="..." href="/?page=17&amp;isSortAscending=False"> // between-icon
+                <span aria-hidden="true">...</span> // between-icon
+            </a>
+        </li>
+        <li class="activate"> // activate-class
+            <a aria-label="5" class="active" href="/?page=5&amp;isSortAscending=False"> // activate-class
+                <span aria-hidden="true">5</span>
+            </a>
+        </li>
+        <li>
+            <a aria-label="6" href="/?page=6&amp;isSortAscending=False">
+                <span aria-hidden="true">6</span>
+            </a>
+        </li>
+         <li>
+            <a aria-label="7" href="/?page=7&amp;isSortAscending=False">
+                <span aria-hidden="true">7</span>
+            </a>
+        </li>
+         <li>
+            <a aria-label="8" href="/?page=8&amp;isSortAscending=False">
+                <span aria-hidden="true">8</span>
+            </a>
+        </li>
+         <li>
+            <a aria-label="9" href="/?page=9&amp;isSortAscending=False">
+                <span aria-hidden="true">9</span>
+            </a>
+        </li>
+        <li> 
+            <a aria-label="..."> // between-icon
+                <span aria-hidden="true">...</span> // between-icon
+            </a>
+        </li>
+        <li>
+            <a aria-label="last-icon" href="/?page=17&amp;isSortAscending=False"> // last-icon
+                <span aria-hidden="true">Last</span> // last-icon
+            </a>
+        </li>
+        <li>
+            <a aria-label="next-icon" href="/?page=2&amp;isSortAscending=False"> // next-icon
+                <span aria-hidden="true">Next</span> // next-icon
+            </a>
+        </li>
+    </ul>
+</nav>
+```
+
 <hr/>
 
 <h3>Custom Query attribute</h3>
@@ -132,7 +234,7 @@ And add attributes to tag
   <thead>
     <tr>
       <td><strong>Attribute</strong></td>
-      <td><strong>Comment</strong></td>
+      <td><strong>Description</strong></td>
     </tr>
   </thead>
   <tbody>
@@ -147,6 +249,17 @@ And add attributes to tag
   </tbody>
 </table>
 <br/>
+
+<h3>Custom query attribue with pagination tag</h3>
+
+```html
+<pagination paging-model="@Model.PagingObj"
+            total-items="@Model.TotalItems"
+            active-custom-query-options="true" // must be true
+            query-options="@Model.QueryOptions"
+            page-action="CustomQuery">
+</pagination>
+```
 
 <hr/>
 
@@ -178,4 +291,29 @@ And add attributes to tag
  </tbody>
 </table>
 
-<h3>Please look at PaginationTaghelperExample for more implementing details</h3>
+<hr/>
+<h2>PaginationTaghelper offer three IQueryable Extension methods to help you building with pagination</h2>
+<table>
+ <thead>
+  <tr>
+   <td><strong>Extension></strong></td>
+   <td><strong>Comment</strong></td>
+  </tr>
+ </thead>
+ <tbody>
+  <tr>
+  <td><strong>ApplySearching</strong></td>
+   <td>With two parameter,first is your query list,and second is your search map which you must add your custom search method<T></td>
+  </tr>
+  <tr>
+  <td><strong>ApplyOrdering</strong></td>
+   <td>With two parameter,first is your query list,and second is your sorted map</td>
+  </tr>
+  <tr>
+  <td><strong>ApplyPaging</strong></td>
+   <td>With one parameter IPagingObject</td>
+  </tr>
+ </tbody>
+</table>
+
+<h3>Please look at PaginationTaghelperExample for more implementation details</h3>
