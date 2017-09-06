@@ -39,22 +39,27 @@ namespace PaginationTagHelper
         public string AttributesValidationSummary { get; set; }
 
         /*-----------------------Must Be Fullfill-------------------------*/
-        public IPagingObject PagingModel { get; set; }
+        //public IPagingObject PagingModel { get; set; }
+
+        public int ItemPerPage { get; set; }
+
+        public int CurrentPage { get; set; }
 
         public bool ActiveCustomQueryOptions { get; set; } = false;
 
         public int TotalItems { get; set; }
 
+
         private int TotalPages
         {
             get
             {
-                if (PagingModel.ItemPerPage <= 0)
+                if (ItemPerPage <= 0)
                 {
-                    PagingModel.ItemPerPage = 5;
+                    ItemPerPage = 5;
                 }
                 return (int)Math.Ceiling((decimal)
-                    TotalItems / PagingModel.ItemPerPage);
+                    TotalItems / ItemPerPage);
             }
         }
 
@@ -133,20 +138,20 @@ namespace PaginationTagHelper
                     page_action: i,
                     icon: i.ToString(),
                     is_disabled: false,
-                    active_page: i == PagingModel.Page);
+                    active_page: i == CurrentPage);
 
                 TagBuilder first_li = PageButton(
-                    has_link: PagingModel.Page > 1,
+                    has_link: CurrentPage > 1,
                     page_action: i,
                     icon: PageFirstIcon,
-                    is_disabled: PagingModel.Page == 1,
+                    is_disabled: CurrentPage == 1,
                     active_page: false);
 
                 TagBuilder last_li = PageButton(
-                    has_link: PagingModel.Page < TotalPages,
+                    has_link: CurrentPage < TotalPages,
                     page_action: i,
                     icon: PageLastIcon,
-                    is_disabled: PagingModel.Page == TotalPages,
+                    is_disabled: CurrentPage == TotalPages,
                     active_page: false);
 
                 TagBuilder dot_li = PageButton(
@@ -171,16 +176,16 @@ namespace PaginationTagHelper
                     if (i == 1)
                     {
                         var pre_li = PageButton(
-                            has_link: (PagingModel.Page - 1) >= 1,
-                            page_action: PagingModel.Page - 1,
+                            has_link: (CurrentPage - 1) >= 1,
+                            page_action: CurrentPage - 1,
                             icon: PagePreviousIcon,
-                            is_disabled: PagingModel.Page == 1,
+                            is_disabled: CurrentPage == 1,
                             active_page: false);
 
                         ul.InnerHtml.AppendHtml(pre_li);
                         // if current page is bigger than 3 
                         // TotalPage can't be same as PageMiddleLength 
-                        if (PagingModel.Page > PageMiddleLength + 1 &&
+                        if (CurrentPage > PageMiddleLength + 1 &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
                             PageShowBetweenIcon)
                         {
@@ -194,10 +199,10 @@ namespace PaginationTagHelper
                     if (i == 1)
                     {
                         var pre_li = PageButton(
-                            has_link: (PagingModel.Page - 1) >= 1,
-                            page_action: PagingModel.Page - 1,
+                            has_link: (CurrentPage - 1) >= 1,
+                            page_action: CurrentPage - 1,
                             icon: PagePreviousIcon,
-                            is_disabled: PagingModel.Page == 1,
+                            is_disabled: CurrentPage == 1,
                             active_page: false);
 
                         ul.InnerHtml.AppendHtml(pre_li);
@@ -208,7 +213,7 @@ namespace PaginationTagHelper
                     {
                         ul.InnerHtml.AppendHtml(first_li);
                         // if current page is bigger than 3 
-                        if (PagingModel.Page > PageMiddleLength + 1 &&
+                        if (CurrentPage > PageMiddleLength + 1 &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
                             PageShowBetweenIcon)
                         {
@@ -229,7 +234,7 @@ namespace PaginationTagHelper
                 // Show pages less than 5 && show pages if bigger than current page-3
 
                 if (i <= PageTopBottomLength &&
-                    i >= PagingModel.Page - PageMiddleLength)
+                    i >= CurrentPage - PageMiddleLength)
                 {
                     checkPageRepeated = false;
                     ul.InnerHtml.AppendHtml(list_li);
@@ -241,8 +246,8 @@ namespace PaginationTagHelper
                 // which is middle pages
                 if (i > PageTopBottomLength &&
                     i <= TotalPages - PageTopBottomLength &&
-                    i >= PagingModel.Page - PageMiddleLength &&
-                    i <= PagingModel.Page + PageMiddleLength)
+                    i >= CurrentPage - PageMiddleLength &&
+                    i <= CurrentPage + PageMiddleLength)
                 {
                     ul.InnerHtml.AppendHtml(list_li);
                 }
@@ -251,7 +256,7 @@ namespace PaginationTagHelper
                 // if current page in the top then show 5 pages
                 // and total pages must be bigger than 5
                 if (i > TotalPages - PageTopBottomLength &&
-                    i <= PagingModel.Page + PageMiddleLength &&
+                    i <= CurrentPage + PageMiddleLength &&
                     checkPageRepeated)
                 {
                     ul.InnerHtml.AppendHtml(list_li);
@@ -267,13 +272,13 @@ namespace PaginationTagHelper
                     if (i == TotalPages)
                     {
                         var next_li = PageButton(
-                            has_link: (PagingModel.Page + 1) <= TotalPages,
-                            page_action: PagingModel.Page + 1,
+                            has_link: (CurrentPage + 1) <= TotalPages,
+                            page_action: CurrentPage + 1,
                             icon: PageNextIcon,
-                            is_disabled: PagingModel.Page == TotalPages,
+                            is_disabled: CurrentPage == TotalPages,
                             active_page: false);
                         // if current page is smaller than total page minus five 
-                        if ((PagingModel.Page < TotalPages - PageMiddleLength) &&
+                        if ((CurrentPage < TotalPages - PageMiddleLength) &&
                             TotalPages > (1 + PageMiddleLength * 2)
                             && PageShowBetweenIcon)
                         {
@@ -296,7 +301,7 @@ namespace PaginationTagHelper
                     if (i == TotalPages && PageShowLast)
                     {
                         // if current page is smaller than total page minus five 
-                        if ((PagingModel.Page < TotalPages - PageMiddleLength) &&
+                        if ((CurrentPage < TotalPages - PageMiddleLength) &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
                             PageShowBetweenIcon)
                         {
@@ -310,10 +315,10 @@ namespace PaginationTagHelper
                     if (i == TotalPages)
                     {
                         var next_li = PageButton(
-                            has_link: (PagingModel.Page + 1) <= TotalPages,
-                            page_action: PagingModel.Page + 1,
+                            has_link: (CurrentPage + 1) <= TotalPages,
+                            page_action: CurrentPage + 1,
                             icon: PageNextIcon,
-                            is_disabled: PagingModel.Page == TotalPages,
+                            is_disabled: CurrentPage == TotalPages,
                             active_page: false);
 
 

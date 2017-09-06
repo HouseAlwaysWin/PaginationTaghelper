@@ -1,4 +1,4 @@
-﻿@model CustomerPaginationViewModel
+﻿@model CustomerViewModel
 
 <br />
 
@@ -32,19 +32,24 @@
         <tr>
             <th>
                 Id
-                @if (!Model.QueryObj.IsSortAscending)
+                @if (Model.IsSortDescending)
                 {
                     <a href="@Url.Action("CustomQuery",
                                                      new
                                                      {
-                                                         page = Model.PagingObj.Page,
-                                                         searchby = Model.QueryObj.SearchBy,
-                                                         searchItem= Model.QueryObj.SearchItem,
+                                                         page = Model.Page,
+                                                         searchby = Model.SearchBy,
+                                                         searchItem= Model.SearchItem,
                                                          sortby = "Id",
-                                                         IsSortAscending =true
+                                                         IsSortAscending =false
                                                      })">
 
-                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+
+
+
+
+
                     </a>
                 }
                 else
@@ -52,29 +57,30 @@
                     <a href="@Url.Action("CustomQuery",
                                 new
                                 {
-                                    page = Model.PagingObj.Page,
-                                    searchby = Model.QueryObj.SearchBy,
-                                    searchItem = Model.QueryObj.SearchItem,
+                                    page = Model.Page,
+                                    searchby = Model.SearchBy,
+                                    searchItem = Model.SearchItem,
                                     sortby = "Id",
-                                    IsSortAscending =false
+                                    IsSortAscending= true
                                 })">
+                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
 
-                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
                     </a>
+
                 }
             </th>
             <th>
                 Name
-                @if (!Model.QueryObj.IsSortAscending)
+                @if (!Model.IsSortDescending)
                 {
                     <a href="@Url.Action("CustomQuery",
                                                   new
                                                   {
-                                                      page = Model.PagingObj.Page,
+                                                      page = Model.Page,
                                                       sortby = "Name",
                                                       IsSortAscending = true,
-                                                      searchby = Model.QueryObj.SearchBy,
-                                                      searchItem = Model.QueryObj.SearchItem
+                                                      searchby = Model.SearchBy,
+                                                      searchItem = Model.SearchItem
                                                   })">
                         <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
                     </a>
@@ -83,11 +89,11 @@
                 {
                     <a href="@Url.Action("CustomQuery", new
                             {
-                                page = Model.PagingObj.Page,
+                                page = Model.Page,
                                 sortby = "Name",
                                 IsSortAscending = false,
-                                searchby = Model.QueryObj.SearchBy,
-                                searchItem = Model.QueryObj.SearchItem
+                                searchby = Model.SearchBy,
+                                searchItem = Model.SearchItem
                             })">
                         <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
                     </a>
@@ -126,10 +132,10 @@
 
 
 
-<pagination paging-model="@Model.PagingObj"
-            total-items="@Model.TotalItems"
+<pagination total-items="@Model.TotalItems"
             active-custom-query-options="true"
             page-query-list="@Model.QueryOptions"
+            current-page="@Model.Page"
             page-action="CustomQuery"
             page-controller="Home">
 </pagination>

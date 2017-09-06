@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq.Expressions;
-using PaginationTagHelper.Querying;
 using Microsoft.AspNetCore.Authorization;
 using PaginationTaghelperExample.Models;
+using PaginationTagHelper.Extensions;
 using PaginationTaghelperExample.Data;
-using System.Dynamic;
 using Newtonsoft.Json;
 
 namespace PaginationTaghelperExample.Controllers
@@ -29,24 +27,26 @@ namespace PaginationTaghelperExample.Controllers
         {
             var query = DbContext.Customer.AsQueryable();
 
-            // Set Searching method
-            var searchMap =
-               new Dictionary<string, Expression<Func<Customer, bool>>>()
-               {
-                   ["Id"] = c => c.Id.ToString().Contains(model.SearchItem),
-                   ["Name"] = c => c.Name.Contains(model.SearchItem)
-               };
+            //// Set Searching method
+            //var searchMap =
+            //   new Dictionary<string, Expression<Func<Customer, bool>>>()
+            //   {
+            //       ["Id"] = c => c.Id.ToString().Contains(model.SearchItem),
+            //       ["Name"] = c => c.Name.Contains(model.SearchItem)
+            //   };
 
-            var sortedMap =
-                new Dictionary<string, Expression<Func<Customer, object>>>()
-                {
-                    ["Id"] = c => c.Id,
-                    ["Name"] = c => c.Name
-                };
+            //var sortedMap =
+            //    new Dictionary<string, Expression<Func<Customer, object>>>()
+            //    {
+            //        ["Id"] = c => c.Id,
+            //        ["Name"] = c => c.Name
+            //    };
 
+            query = query.ToSearchByList(model.SearchBy, model.SearchItem);
+            query = query.ToOrderByList(model.SortBy, model.IsSortDescending);
 
-            query = query.ApplySearching(model, searchMap);
-            query = query.ApplyOrdering(model, sortedMap);
+            //query = query.ApplySearching(model, searchMap);
+            //query = query.ApplyOrdering(model, sortedMap);
 
 
             // TotalItems is must be set before ApplyPaging Extensions
@@ -55,14 +55,21 @@ namespace PaginationTaghelperExample.Controllers
             // if not set ItemPerPage the default is 5
             model.ItemPerPage = 3;
 
-            query = query.ApplyPaging(model);
+            //query = query.ApplyPaging(model);
+            query = query.ToPageList(model.Page);
 
-            var result = new CustomerPaginationViewModel
+
+            var result = new CustomerViewModel
             {
+                SearchBy = model.SearchBy,
+                SearchItem = model.SearchItem,
+                IsSortDescending = model.IsSortDescending,
+                Page = model.Page,
+                ItemPerPage = model.ItemPerPage,
+                SortBy = model.SortBy,
+                ShowAll = model.ShowAll,
                 Items = query,
-                TotalItems = totalItems,
-                QueryObj = model,
-                PagingObj = model
+                TotalItems = totalItems
             };
 
             return View(result);
@@ -73,32 +80,36 @@ namespace PaginationTaghelperExample.Controllers
         public IActionResult CustomQuery(CustomerViewModel model)
         {
             var query = DbContext.Customer.AsQueryable();
+            //// Set Searching method
+            //var searchMap =
+            //   new Dictionary<string, Expression<Func<Customer, bool>>>()
+            //   {
+            //       ["Id"] = c => c.Id.ToString().Contains(model.SearchItem),
+            //       ["Name"] = c => c.Name.Contains(model.SearchItem)
+            //   };
 
-            // Set Searching method
-            var searchMap =
-               new Dictionary<string, Expression<Func<Customer, bool>>>()
-               {
-                   ["Id"] = c => c.Id.ToString().Contains(model.SearchItem),
-                   ["Name"] = c => c.Name.Contains(model.SearchItem)
-               };
-
-            var sortedMap =
-                new Dictionary<string, Expression<Func<Customer, object>>>()
-                {
-                    ["Id"] = c => c.Id,
-                    ["Name"] = c => c.Name
-                };
+            //var sortedMap =
+            //    new Dictionary<string, Expression<Func<Customer, object>>>()
+            //    {
+            //        ["Id"] = c => c.Id,
+            //        ["Name"] = c => c.Name
+            //    };
 
 
-            query = query.ApplySearching(model, searchMap);
-            query = query.ApplyOrdering(model, sortedMap);
+            //query = query.ApplySearching(model, searchMap);
+            //query = query.ApplyOrdering(model, sortedMap);
+
+            query = query.ToSearchByList(model.SearchBy, model.SearchItem);
+            query = query.ToOrderByList(model.SortBy, model.IsSortDescending);
 
 
             // TotalItems is must be set before ApplyPaging Extensions
             int totalItems = query.Count();
 
+            query = query.ToPageList(model.Page);
+            //query = query.ApplyPaging(model);
             // if not set ItemPerPage the default is 5
-            model.ItemPerPage = 10;
+
 
             // Add more query options with dynamic binding
             // To keep paging action correct
@@ -108,25 +119,29 @@ namespace PaginationTaghelperExample.Controllers
             //queryOptions.searchItem = model.SearchItem;
             //queryOptions.IsSortAscending = model.IsSortAscending;
 
-            Dictionary<string, string> queryOptions = new Dictionary<string, string>
+            Dictionary<string, string> queryOptionsDict = new Dictionary<string, string>
             {
-                ["SearchItem"]=model.SearchItem,
-                ["SearchBy"]=model.SearchBy,
+                ["SearchItem"] = model.SearchItem,
+                ["SearchBy"] = model.SearchBy,
                 ["SortBy"] = model.SortBy,
-                ["IsSortAscending"] = model.IsSortAscending.ToString()
+                ["IsSortDescending"] = model.IsSortDescending.ToString()
             };
 
-            var queryList = JsonConvert.SerializeObject(queryOptions);
+            var queryOptions = JsonConvert.SerializeObject(queryOptionsDict);
 
-            query = query.ApplyPaging(model);
 
-            var result = new CustomerPaginationViewModel
+            var result = new CustomerViewModel
             {
+                SearchBy = model.SearchBy,
+                SearchItem = model.SearchItem,
+                IsSortDescending = model.IsSortDescending,
+                Page = model.Page,
+                ItemPerPage = model.ItemPerPage,
+                SortBy = model.SortBy,
+                ShowAll = model.ShowAll,
+                QueryOptions = queryOptions,
                 Items = query,
-                TotalItems = totalItems,
-                PagingObj = model,
-                QueryObj = model,
-                QueryOptions = queryList
+                TotalItems = totalItems
             };
 
             return View(result);
