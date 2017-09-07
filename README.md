@@ -431,7 +431,7 @@ Under the code will show what tags will be changed with attributes.
 </table>
 
 <hr/>
-<h2>PaginationTaghelper offer three IQueryable Extension methods to help you building with pagination</h2>
+<h2>PaginationTaghelper give you three IQueryable Extension methods to help you building with pagination</h2>
 <table>
  <thead>
   <tr>
