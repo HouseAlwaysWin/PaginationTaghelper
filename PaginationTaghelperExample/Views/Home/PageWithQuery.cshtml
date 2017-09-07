@@ -149,3 +149,65 @@
                 sortby:"@Model.SortBy",
                 issortdescending:"@Model.IsSortDescending"}'>
 </pagination>
+
+<!-- Pagination with attribute for each one-->
+<pagination total-items="@Model.TotalItems"
+            item-per-page="@Model.ItemPerPage"
+            current-page="@Model.Page"
+            page-action="PageWithQuery"
+            attrs-page-first='{
+                class:"first page "
+            }'
+            attrs-page-last='{
+                class:"last page"
+            }'
+            attrs-page-previous='{
+                class:"previous page"
+            }'
+            attrs-page-next='{
+                class:"next page"
+            }'
+            attrs-page-first-link='{
+                style:"color:red;"
+            }'
+            attrs-page-last-link='{
+                style:"color:gray;"
+            }'
+            attrs-page-previous-link='{
+                style:"color:pink;"
+            }'
+            attrs-page-next-link='{
+                style:"color:purple;"
+            }'
+            attrs-page-first-icon='{
+                style:"color:blue;"
+            }'
+            attrs-page-last-icon='{
+                style:"color:green;"
+            }'
+            attrs-page-previous-icon='{
+                style:"color:black;"
+            }'
+            attrs-page-next-icon='{
+                style:"color:white;"
+            }'
+            attrs-page-between='{
+                Id:"between icon"
+            }'
+            attrs-page-between-icon='{
+                style:"color:red;"
+            }'
+            attrs-page-link='{
+                style:"color:yellow;",
+                Id:"link*"
+            }'
+
+            attrs-page-icon='{
+                style:"color:green;"
+            }'
+            page-query-options='{
+                SearchItem:"@Model.SearchItem" ,
+                searchby:"@Model.SearchBy",
+                sortby:"@Model.SortBy",
+                issortdescending:"@Model.IsSortDescending"}'>
+</pagination>

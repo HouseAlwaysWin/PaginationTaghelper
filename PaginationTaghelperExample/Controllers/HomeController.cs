@@ -62,7 +62,7 @@ namespace PaginationTaghelperExample.Controllers
 
             int totalItems = query.Count();
 
-            model.ItemPerPage = 10;
+            model.ItemPerPage = 5;
             query = query.ToPageList(model.Page, model.ItemPerPage);
 
             Dictionary<string, string> queryOptionsDict = new Dictionary<string, string>

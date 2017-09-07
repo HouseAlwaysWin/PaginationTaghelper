@@ -36,18 +36,13 @@ namespace PaginationTagHelper
         [HtmlAttributeNotBound]
         public ViewContext ViewContext { get; set; }
 
-        public string AttributesValidationSummary { get; set; }
-
         /*-----------------------Must Be Fullfill-------------------------*/
 
-        public int ItemPerPage { get; set; }
+        public int ItemPerPage { get; set; } = 5;
 
         public int CurrentPage { get; set; } = 1;
 
-        public bool ActiveCustomQueryOptions { get; set; } = false;
-
         public int TotalItems { get; set; }
-
 
         private int TotalPages
         {
@@ -63,9 +58,7 @@ namespace PaginationTagHelper
         }
 
         public string CurrentPageParameter { get; set; } = "page";
-
         public string PageQueryOptions { get; set; }
-
         private Dictionary<string, string> QueryOptions
         {
             get
@@ -80,8 +73,6 @@ namespace PaginationTagHelper
 
         public string PageController { get; set; } = "";
 
-        //public string PageStyleClass { get; set; } = "pagination";
-
         public string TagPagination { get; set; } = "nav";
 
         public string TagPageGroup { get; set; } = "ul";
@@ -95,7 +86,7 @@ namespace PaginationTagHelper
         }
 
         public string TagPageList { get; set; } = "li";
-        public string AttrsPageList { get; set; }
+        public string AttrsPageList { get; set; } = "";
         public Dictionary<string, string> AttrsPageListDict
         {
             get
@@ -105,7 +96,7 @@ namespace PaginationTagHelper
         }
 
         public string TagPageLink { get; set; } = "a";
-        public string AttrsPageLink { get; set; }
+        public string AttrsPageLink { get; set; } = "";
         public Dictionary<string, string> AttrsPageLinkDict
         {
             get
@@ -115,8 +106,8 @@ namespace PaginationTagHelper
         }
 
         public string TagPageIcon { get; set; } = "span";
-        public string AttrsPageIcon { get; set; }
-        public Dictionary<string, string> AttrsPageIconDict
+        public string AttrsPageIcon { get; set; } = "";
+        private Dictionary<string, string> AttrsPageIconDict
         {
             get
             {
@@ -125,7 +116,7 @@ namespace PaginationTagHelper
         }
 
         public string AttrsPageFirst { get; set; }
-        public Dictionary<string, string> AttrsPageFirstDict
+        private Dictionary<string, string> AttrsPageFirstDict
         {
             get
             {
@@ -133,15 +124,132 @@ namespace PaginationTagHelper
             }
         }
 
-        public string AttrsPageLast { get; set; }
-        public Dictionary<string, string> AttrsPageLastDict
+        public string AttrsPageFirstLink { get; set; }
+        private Dictionary<string, string> AttrsPageFirstLinkDict
         {
             get
             {
-                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageFirst);
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageFirstLink);
             }
         }
 
+        public string AttrsPageFirstIcon { get; set; }
+        private Dictionary<string, string> AttrsPageFirstIconDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageFirstIcon);
+            }
+        }
+        public string PageFirstIcon { get; set; } = "First";
+
+        public string AttrsPageLast { get; set; } = "";
+        private Dictionary<string, string> AttrsPageLastDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageLast);
+            }
+        }
+
+
+        public string AttrsPageLastLink { get; set; }
+        private Dictionary<string, string> AttrsPageLastLinkDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageLastLink);
+            }
+        }
+
+        public string AttrsPageLastIcon { get; set; }
+        private Dictionary<string, string> AttrsPageLastIconDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageLastIcon);
+            }
+        }
+        public string PageLastIcon { get; set; } = "Last";
+
+
+        public string AttrsPagePrevious { get; set; }
+        private Dictionary<string, string> AttrsPagePreviousDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPagePrevious);
+            }
+        }
+
+
+        public string AttrsPagePreviousLink { get; set; }
+        private Dictionary<string, string> AttrsPagePreviousLinkDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPagePreviousLink);
+            }
+        }
+
+        public string AttrsPagePreviousIcon { get; set; }
+        private Dictionary<string, string> AttrsPagePreviousIconDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPagePreviousIcon);
+            }
+        }
+        public string PagePreviousIcon { get; set; } = "Previous";
+
+        public string AttrsPageNext { get; set; }
+        private Dictionary<string, string> AttrsPageNextDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageNext);
+            }
+        }
+
+
+        public string AttrsPageNextLink { get; set; }
+        private Dictionary<string, string> AttrsPageNextLinkDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageNextLink);
+            }
+        }
+
+        public string AttrsPageNextIcon { get; set; }
+        private Dictionary<string, string> AttrsPageNextIconDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageNextIcon);
+            }
+        }
+        public string PageNextIcon { get; set; } = "Next";
+
+
+        public string AttrsPageBetween { get; set; }
+        private Dictionary<string, string> AttrsPageBetweenDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageBetween);
+            }
+        }
+
+        public string AttrsPageBetweenIcon { get; set; }
+        private Dictionary<string, string> AttrsPageBetweenIconDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageBetweenIcon);
+            }
+        }
+        public string PageBetweenIcon { get; set; } = "...";
 
         public string PageActiveClass { get; set; } = "active";
 
@@ -151,21 +259,13 @@ namespace PaginationTagHelper
 
         public int PageTopBottomLength { get; set; } = 5;
 
-        public string PagePreviousIcon { get; set; } = "Previous";
-
-        public string PageNextIcon { get; set; } = "Next";
-
-        public string PageFirstIcon { get; set; } = "First";
-
-        public string PageLastIcon { get; set; } = "Last";
-
         public bool PageShowFirst { get; set; } = true;
 
         public bool PageShowLast { get; set; } = true;
 
-        public string PageBetweenIcon { get; set; } = "...";
 
-        public bool PageShowBetweenIcon { get; set; } = true;
+
+        public bool PageShowBetween { get; set; } = true;
 
         public bool PageExchangePreviousFirstBtn { get; set; }
 
@@ -212,7 +312,8 @@ namespace PaginationTagHelper
                     page_action: i,
                     icon: i.ToString(),
                     is_disabled: false,
-                    active_page: i == CurrentPage);
+                    active_page: i == CurrentPage,
+                    page_type: "");
 
                 if (AttrsPageListDict.Count != 0)
                 {
@@ -226,7 +327,8 @@ namespace PaginationTagHelper
                     page_action: i,
                     icon: PageFirstIcon,
                     is_disabled: CurrentPage == 1,
-                    active_page: false);
+                    active_page: false,
+                    page_type: "first");
 
                 if (AttrsPageFirstDict.Count != 0)
                 {
@@ -239,7 +341,8 @@ namespace PaginationTagHelper
                     page_action: i,
                     icon: PageLastIcon,
                     is_disabled: CurrentPage == TotalPages,
-                    active_page: false);
+                    active_page: false,
+                    page_type: "last");
 
                 if (AttrsPageLastDict.Count != 0)
                 {
@@ -252,7 +355,14 @@ namespace PaginationTagHelper
                     page_action: i,
                     icon: PageBetweenIcon,
                     is_disabled: true,
-                    active_page: false);
+                    active_page: false,
+                    page_type: "between");
+
+                if (AttrsPageBetweenDict.Count != 0)
+                {
+                    HtmlAttributesHelper.AddAttributes(
+                        dot_li, AttrsPageBetweenDict);
+                }
 
                 /*-----------------------Show First and Previous Page Button-------------------------*/
 
@@ -273,14 +383,21 @@ namespace PaginationTagHelper
                             page_action: CurrentPage - 1,
                             icon: PagePreviousIcon,
                             is_disabled: CurrentPage == 1,
-                            active_page: false);
+                            active_page: false,
+                            page_type: "previous");
+
+                        if (AttrsPagePreviousDict.Count != 0)
+                        {
+                            HtmlAttributesHelper.AddAttributes(
+                                pre_li, AttrsPagePreviousDict);
+                        }
 
                         ul.InnerHtml.AppendHtml(pre_li);
                         // if current page is bigger than 3 
                         // TotalPage can't be same as PageMiddleLength 
                         if (CurrentPage > PageMiddleLength + 1 &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
-                            PageShowBetweenIcon)
+                            PageShowBetween)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -296,7 +413,14 @@ namespace PaginationTagHelper
                             page_action: CurrentPage - 1,
                             icon: PagePreviousIcon,
                             is_disabled: CurrentPage == 1,
-                            active_page: false);
+                            active_page: false,
+                            page_type: "previous");
+
+                        if (AttrsPagePreviousDict.Count != 0)
+                        {
+                            HtmlAttributesHelper.AddAttributes(
+                                pre_li, AttrsPagePreviousDict);
+                        }
 
                         ul.InnerHtml.AppendHtml(pre_li);
                     }
@@ -308,7 +432,7 @@ namespace PaginationTagHelper
                         // if current page is bigger than 3 
                         if (CurrentPage > PageMiddleLength + 1 &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
-                            PageShowBetweenIcon)
+                            PageShowBetween)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -367,11 +491,19 @@ namespace PaginationTagHelper
                             page_action: CurrentPage + 1,
                             icon: PageNextIcon,
                             is_disabled: CurrentPage == TotalPages,
-                            active_page: false);
+                            active_page: false,
+                            page_type: "next");
+
+                        if (AttrsPageNextDict.Count != 0)
+                        {
+                            HtmlAttributesHelper.AddAttributes(
+                                next_li, AttrsPageNextDict);
+                        }
+
                         // if current page is smaller than total page minus five 
                         if ((CurrentPage < TotalPages - PageMiddleLength) &&
                             TotalPages > (1 + PageMiddleLength * 2)
-                            && PageShowBetweenIcon)
+                            && PageShowBetween)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -394,7 +526,7 @@ namespace PaginationTagHelper
                         // if current page is smaller than total page minus five 
                         if ((CurrentPage < TotalPages - PageMiddleLength) &&
                             TotalPages > (1 + PageMiddleLength * 2) &&
-                            PageShowBetweenIcon)
+                            PageShowBetween)
                         {
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
@@ -410,8 +542,14 @@ namespace PaginationTagHelper
                             page_action: CurrentPage + 1,
                             icon: PageNextIcon,
                             is_disabled: CurrentPage == TotalPages,
-                            active_page: false);
+                            active_page: false,
+                            page_type: "next");
 
+                        if (AttrsPageNextDict.Count != 0)
+                        {
+                            HtmlAttributesHelper.AddAttributes(
+                                next_li, AttrsPageNextDict);
+                        }
 
                         ul.InnerHtml.AppendHtml(next_li);
                     }
@@ -433,12 +571,43 @@ namespace PaginationTagHelper
 
         // Show Page Icon
         // <span aria-hidden="true">{{ icon  }}</span>
-        public TagBuilder PageIcon(string icon)
+        public TagBuilder PageIcon(string icon, string page_type)
         {
             TagBuilder span = new TagBuilder(TagPageIcon);
-            span.Attributes["aria-hidden"] = "true";
-            HtmlAttributesHelper.AddAttributes(span, AttrsPageIconDict);
-            span.InnerHtml.AppendHtml(icon);
+            switch (page_type)
+            {
+                case "first":
+                    span.Attributes["aria-hidden"] = "true";
+                    HtmlAttributesHelper.AddAttributes(span, AttrsPageFirstIconDict);
+                    span.InnerHtml.AppendHtml(icon);
+                    break;
+                case "last":
+                    span.Attributes["aria-hidden"] = "true";
+                    HtmlAttributesHelper.AddAttributes(span, AttrsPageLastIconDict);
+                    span.InnerHtml.AppendHtml(icon);
+                    break;
+                case "previous":
+                    span.Attributes["aria-hidden"] = "true";
+                    HtmlAttributesHelper.AddAttributes(span, AttrsPagePreviousIconDict);
+                    span.InnerHtml.AppendHtml(icon);
+                    break;
+                case "next":
+                    span.Attributes["aria-hidden"] = "true";
+                    HtmlAttributesHelper.AddAttributes(span, AttrsPageNextIconDict);
+                    span.InnerHtml.AppendHtml(icon);
+                    break;
+                case "between":
+                    span.Attributes["aria-hidden"] = "true";
+                    HtmlAttributesHelper.AddAttributes(span, AttrsPageBetweenIconDict);
+                    span.InnerHtml.AppendHtml(icon);
+                    break;
+                default:
+                    span.Attributes["aria-hidden"] = "true";
+                    HtmlAttributesHelper.AddAttributes(span, AttrsPageIconDict);
+                    span.InnerHtml.AppendHtml(icon);
+                    break;
+            }
+
             return span;
         }
 
@@ -491,20 +660,41 @@ namespace PaginationTagHelper
             int page_action,
             string icon,
             bool is_disabled,
-            bool active_page)
+            bool active_page,
+            string page_type)
         {
             TagBuilder li = new TagBuilder(TagPageList);
             TagBuilder a = new TagBuilder(TagPageLink);
-
-            a.Attributes["aria-label"] = icon;
-            HtmlAttributesHelper.AddAttributes(a, AttrsPageLinkDict);
+            switch (page_type)
+            {
+                case "first":
+                    a.Attributes["aria-label"] = icon;
+                    HtmlAttributesHelper.AddAttributes(a, AttrsPageFirstLinkDict);
+                    break;
+                case "last":
+                    a.Attributes["aria-label"] = icon;
+                    HtmlAttributesHelper.AddAttributes(a, AttrsPageLastLinkDict);
+                    break;
+                case "previous":
+                    a.Attributes["aria-label"] = icon;
+                    HtmlAttributesHelper.AddAttributes(a, AttrsPagePreviousLinkDict);
+                    break;
+                case "next":
+                    a.Attributes["aria-label"] = icon;
+                    HtmlAttributesHelper.AddAttributes(a, AttrsPageNextLinkDict);
+                    break;
+                default:
+                    a.Attributes["aria-label"] = icon;
+                    HtmlAttributesHelper.AddAttributes(a, AttrsPageLinkDict);
+                    break;
+            }
 
             if (has_link)
             {
                 a = PageLink(a, page_action);
             }
 
-            a.InnerHtml.AppendHtml(PageIcon(icon));
+            a.InnerHtml.AppendHtml(PageIcon(icon, page_type));
             li.InnerHtml.AppendHtml(a);
 
             if (is_disabled)
