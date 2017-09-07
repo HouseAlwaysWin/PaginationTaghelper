@@ -38,6 +38,7 @@ namespace PaginationTagHelper
 
         /*-----------------------Must Be Fullfill-------------------------*/
 
+        #region Main Properties
         public int ItemPerPage { get; set; } = 5;
 
         public int CurrentPage { get; set; } = 1;
@@ -68,11 +69,12 @@ namespace PaginationTagHelper
         }
         private Dictionary<string, string> QueryListDict { get; set; } = new Dictionary<string, string>();
 
-
         public string PageAction { get; set; } = "";
 
         public string PageController { get; set; } = "";
+        #endregion
 
+        #region Pagination Tag 
         public string TagPagination { get; set; } = "nav";
 
         public string TagPageGroup { get; set; } = "ul";
@@ -115,6 +117,9 @@ namespace PaginationTagHelper
             }
         }
 
+        #endregion
+
+        #region First Page Attributes 
         public string AttrsPageFirst { get; set; }
         private Dictionary<string, string> AttrsPageFirstDict
         {
@@ -143,6 +148,9 @@ namespace PaginationTagHelper
         }
         public string PageFirstIcon { get; set; } = "First";
 
+        #endregion
+
+        #region Last Page Attributes
         public string AttrsPageLast { get; set; } = "";
         private Dictionary<string, string> AttrsPageLastDict
         {
@@ -171,8 +179,9 @@ namespace PaginationTagHelper
             }
         }
         public string PageLastIcon { get; set; } = "Last";
+        #endregion
 
-
+        #region Previous Page Attributes
         public string AttrsPagePrevious { get; set; }
         private Dictionary<string, string> AttrsPagePreviousDict
         {
@@ -201,7 +210,9 @@ namespace PaginationTagHelper
             }
         }
         public string PagePreviousIcon { get; set; } = "Previous";
+        #endregion
 
+        #region Next Page Attributes
         public string AttrsPageNext { get; set; }
         private Dictionary<string, string> AttrsPageNextDict
         {
@@ -210,7 +221,6 @@ namespace PaginationTagHelper
                 return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageNext);
             }
         }
-
 
         public string AttrsPageNextLink { get; set; }
         private Dictionary<string, string> AttrsPageNextLinkDict
@@ -230,8 +240,9 @@ namespace PaginationTagHelper
             }
         }
         public string PageNextIcon { get; set; } = "Next";
+        #endregion
 
-
+        #region Between Page Attributes
         public string AttrsPageBetween { get; set; }
         private Dictionary<string, string> AttrsPageBetweenDict
         {
@@ -250,7 +261,9 @@ namespace PaginationTagHelper
             }
         }
         public string PageBetweenIcon { get; set; } = "...";
+        #endregion
 
+        #region Other Properties
         public string PageActiveClass { get; set; } = "active";
 
         public string PageDisableClass { get; set; } = "disabled";
@@ -263,13 +276,12 @@ namespace PaginationTagHelper
 
         public bool PageShowLast { get; set; } = true;
 
-
-
         public bool PageShowBetween { get; set; } = true;
 
         public bool PageExchangePreviousFirstBtn { get; set; }
 
         public bool PageExchangeNextLastBtn { get; set; }
+        #endregion
 
         public override void Process(
             TagHelperContext context, TagHelperOutput output)
@@ -568,7 +580,7 @@ namespace PaginationTagHelper
 
         }
 
-
+        #region Helper method
         // Show Page Icon
         // <span aria-hidden="true">{{ icon  }}</span>
         public TagBuilder PageIcon(string icon, string page_type)
@@ -710,5 +722,6 @@ namespace PaginationTagHelper
 
             return li;
         }
+        #endregion
     }
 }
