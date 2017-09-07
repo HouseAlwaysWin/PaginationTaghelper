@@ -50,7 +50,7 @@ namespace PaginationTaghelperExample
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=DefaultQuery}/{id?}");
+                    template: "{controller=Home}/{action=PageWithOutQuery}/{id?}");
             });
         }
     }

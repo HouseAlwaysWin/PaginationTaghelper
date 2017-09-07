@@ -23,39 +23,27 @@ namespace PaginationTaghelperExample.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult DefaultQuery(CustomerViewModel model)
+        public IActionResult PageWithoutQuery(CustomerViewModel model)
         {
             var query = DbContext.Customer.AsQueryable();
 
             query = query.ToSearchByList(model.SearchBy, model.SearchItem);
             query = query.ToOrderByList(model.SortBy, model.IsSortDescending);
 
-            // TotalItems is must be set before ApplyPaging Extensions
+            // Count total Items before pagination
             int totalItems = query.Count();
 
-            //query = query.ApplyPaging(model);
-            query = query.ToPageList(model.Page, 3);
-
-            Dictionary<string, string> queryOptionsDict = new Dictionary<string, string>
-            {
-                ["SearchItem"] = model.SearchItem,
-                ["SearchBy"] = model.SearchBy,
-                ["SortBy"] = model.SortBy,
-                ["IsSortDescending"] = model.IsSortDescending.ToString()
-            };
-
-            var queryOptions = JsonConvert.SerializeObject(queryOptionsDict);
-
+            query = query.ToPageList(model.Page, 8);
 
             var result = new CustomerViewModel
             {
                 SearchBy = model.SearchBy,
                 SearchItem = model.SearchItem,
                 IsSortDescending = model.IsSortDescending,
+                SortBy = model.SortBy,
+
                 Page = model.Page,
                 ItemPerPage = model.ItemPerPage,
-                SortBy = model.SortBy,
-                QueryOptions = queryOptions,
                 Items = query,
                 TotalItems = totalItems
             };
@@ -65,20 +53,17 @@ namespace PaginationTaghelperExample.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public IActionResult CustomQuery(CustomerViewModel model)
+        public IActionResult PageWithQuery(CustomerViewModel model)
         {
             var query = DbContext.Customer.AsQueryable();
 
             query = query.ToSearchByList(model.SearchBy, model.SearchItem);
             query = query.ToOrderByList(model.SortBy, model.IsSortDescending);
 
-
-            // TotalItems is must be set before ApplyPaging Extensions
             int totalItems = query.Count();
 
-            query = query.ToPageList(model.Page);
-            //query = query.ApplyPaging(model);
-            // if not set ItemPerPage the default is 5
+            model.ItemPerPage = 10;
+            query = query.ToPageList(model.Page, model.ItemPerPage);
 
             Dictionary<string, string> queryOptionsDict = new Dictionary<string, string>
             {
@@ -96,11 +81,11 @@ namespace PaginationTaghelperExample.Controllers
                 SearchBy = model.SearchBy,
                 SearchItem = model.SearchItem,
                 IsSortDescending = model.IsSortDescending,
+                SortBy = model.SortBy,
+                QueryOptions = queryOptions,
+
                 Page = model.Page,
                 ItemPerPage = model.ItemPerPage,
-                SortBy = model.SortBy,
-                ShowAll = model.ShowAll,
-                QueryOptions = queryOptions,
                 Items = query,
                 TotalItems = totalItems
             };

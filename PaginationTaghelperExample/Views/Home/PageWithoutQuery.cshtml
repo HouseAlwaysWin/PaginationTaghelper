@@ -3,7 +3,8 @@
 <br />
 
 
-<form asp-controller="Home" asp-action="CustomQuery" method="get">
+
+<form asp-controller="Home" asp-action="PageWithoutQuery" method="get">
     <div class="input-group">
         <select name="searchby" class="selectpicker" data-width="5%" data-style="btn-success">
             <option value="Id">Id</option>
@@ -22,15 +23,6 @@
 <br />
 
 
-<pagination total-items="@Model.TotalItems"
-            active-custom-query-options="true"
-            page-query-options="@Model.QueryOptions"
-            current-page="@Model.Page"
-            page-action="CustomQuery"
-            page-controller="Home">
-</pagination>
-
-
 <div class="bg-primary panel-body">
     <h4>Customers</h4>
     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -41,70 +33,64 @@
         <tr>
             <th>
                 Id
-                @if (Model.IsSortDescending)
+                @if (!Model.IsSortDescending)
                 {
-                    <a href="@Url.Action("CustomQuery",
+                    <a href="@Url.Action("PageWithoutQuery",
                                                      new
                                                      {
                                                          page = Model.Page,
                                                          searchby = Model.SearchBy,
                                                          searchItem= Model.SearchItem,
                                                          sortby = "Id",
-                                                         IsSortDescending =false
+                                                         IsSortDescending = true
                                                      })">
 
-                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
-
-
-
-
-
+                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
                     </a>
                 }
                 else
                 {
-                    <a href="@Url.Action("CustomQuery",
+                    <a href="@Url.Action("PageWithoutQuery",
                                 new
                                 {
                                     page = Model.Page,
                                     searchby = Model.SearchBy,
                                     searchItem = Model.SearchItem,
                                     sortby = "Id",
-                                    IsSortDescending= true
+                                    IsSortDescending = false
                                 })">
-                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
 
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
                     </a>
-
                 }
             </th>
             <th>
                 Name
-                @if (Model.IsSortDescending)
+                @if (!Model.IsSortDescending)
                 {
-                    <a href="@Url.Action("CustomQuery",
+                    <a href="@Url.Action("PageWithoutQuery",
                                                   new
                                                   {
                                                       page = Model.Page,
                                                       sortby = "Name",
-                                                      IsSortDescending = false,
+                                                      IsSortDescending = true,
                                                       searchby = Model.SearchBy,
                                                       searchItem = Model.SearchItem
                                                   })">
-                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
                     </a>
                 }
                 else
                 {
-                    <a href="@Url.Action("CustomQuery", new
+                    <a href="@Url.Action("PageWithoutQuery", new
                             {
                                 page = Model.Page,
                                 sortby = "Name",
-                                IsSortDescending = true,
+                                IsSortDescending = false,
                                 searchby = Model.SearchBy,
                                 searchItem = Model.SearchItem
                             })">
-                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
                     </a>
                 }
             </th>
@@ -137,12 +123,13 @@
     </tbody>
 </table>
 
-<a href="@Url.Action("CustomQuery")" class="btn btn-primary">Show All Users</a>
+<a href="@Url.Action("PageWithoutQuery", new { showall = true })" class="btn btn-primary">Show All Users</a>
 
 
 
 <pagination total-items="@Model.TotalItems"
-            page-query-options="@Model.QueryOptions"
+            item-per-page="@Model.ItemPerPage"
             current-page="@Model.Page"
-            page-action="CustomQuery">
+            page-action="PageWithoutQuery"
+            page-controller="Home">
 </pagination>
