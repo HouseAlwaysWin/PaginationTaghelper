@@ -146,8 +146,8 @@ namespace PaginationTagHelper.Extensions
             return newQuery;
         }
 
-        public static IEnumerable<TSource> Where<TSource>(
-            this IEnumerable<TSource> query, string propertyName,string containsString)
+        public static IEnumerable<TSource> WhereContains<TSource>(
+            this IEnumerable<TSource> query, string propertyName, string containsString)
         {
             var entityType = typeof(TSource);
             // Create x=>x.PropName
@@ -198,7 +198,7 @@ namespace PaginationTagHelper.Extensions
             return newQuery;
         }
 
-        public static IQueryable<TSource> Where<TSource>(
+        public static IQueryable<TSource> WhereContains<TSource>(
             this IQueryable<TSource> query, string propertyName, string containsString)
         {
             var entityType = typeof(TSource);
@@ -207,13 +207,14 @@ namespace PaginationTagHelper.Extensions
             // x =>
             ParameterExpression args = Expression.Parameter(entityType, "x");
             var entity_property = entityType.GetProperty(propertyName);
-            // x=>x.Id
+            // x.Id
             MemberExpression property = Expression.Property(args,
                 entityType.GetProperty(propertyName));
 
             // Convert to string, x.Id.ToString()
             var convert = Expression.Call(Expression.Convert(property, typeof(object)),
                 typeof(object).GetMethod("ToString"));
+
 
 
             var right = Expression.Constant(containsString);

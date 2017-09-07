@@ -2,6 +2,7 @@
 
 <br />
 
+
 <form asp-controller="Home" asp-action="CustomQuery" method="get">
     <div class="input-group">
         <select name="searchby" class="selectpicker" data-width="5%" data-style="btn-success">
@@ -20,6 +21,14 @@
 
 <br />
 
+
+<pagination total-items="@Model.TotalItems"
+            active-custom-query-options="true"
+            page-query-options="@Model.QueryOptions"
+            current-page="@Model.Page"
+            page-action="CustomQuery"
+            page-controller="Home">
+</pagination>
 
 
 <div class="bg-primary panel-body">
@@ -41,7 +50,7 @@
                                                          searchby = Model.SearchBy,
                                                          searchItem= Model.SearchItem,
                                                          sortby = "Id",
-                                                         IsSortAscending =false
+                                                         IsSortDescending =false
                                                      })">
 
                         <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
@@ -61,7 +70,7 @@
                                     searchby = Model.SearchBy,
                                     searchItem = Model.SearchItem,
                                     sortby = "Id",
-                                    IsSortAscending= true
+                                    IsSortDescending= true
                                 })">
                         <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
 
@@ -71,18 +80,18 @@
             </th>
             <th>
                 Name
-                @if (!Model.IsSortDescending)
+                @if (Model.IsSortDescending)
                 {
                     <a href="@Url.Action("CustomQuery",
                                                   new
                                                   {
                                                       page = Model.Page,
                                                       sortby = "Name",
-                                                      IsSortAscending = true,
+                                                      IsSortDescending = false,
                                                       searchby = Model.SearchBy,
                                                       searchItem = Model.SearchItem
                                                   })">
-                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
                     </a>
                 }
                 else
@@ -91,11 +100,11 @@
                             {
                                 page = Model.Page,
                                 sortby = "Name",
-                                IsSortAscending = false,
+                                IsSortDescending = true,
                                 searchby = Model.SearchBy,
                                 searchItem = Model.SearchItem
                             })">
-                        <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
+                        <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
                     </a>
                 }
             </th>
@@ -128,14 +137,12 @@
     </tbody>
 </table>
 
-<a href="@Url.Action("CustomQuery", new { showall = true })" class="btn btn-primary">Show All Users</a>
+<a href="@Url.Action("CustomQuery")" class="btn btn-primary">Show All Users</a>
 
 
 
 <pagination total-items="@Model.TotalItems"
-            active-custom-query-options="true"
-            page-query-list="@Model.QueryOptions"
+            page-query-options="@Model.QueryOptions"
             current-page="@Model.Page"
-            page-action="CustomQuery"
-            page-controller="Home">
+            page-action="CustomQuery">
 </pagination>

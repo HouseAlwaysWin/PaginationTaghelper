@@ -39,11 +39,10 @@ namespace PaginationTagHelper
         public string AttributesValidationSummary { get; set; }
 
         /*-----------------------Must Be Fullfill-------------------------*/
-        //public IPagingObject PagingModel { get; set; }
 
         public int ItemPerPage { get; set; }
 
-        public int CurrentPage { get; set; }
+        public int CurrentPage { get; set; } = 1;
 
         public bool ActiveCustomQueryOptions { get; set; } = false;
 
@@ -65,25 +64,84 @@ namespace PaginationTagHelper
 
         public string CurrentPageParameter { get; set; } = "page";
 
-        public string PageQueryList { get; set; }
+        public string PageQueryOptions { get; set; }
 
         private Dictionary<string, string> QueryOptions
         {
             get
             {
-                return JsonDeserialize.JsonDeserializeConvert_Dss(PageQueryList);
+                return JsonDeserialize.JsonDeserializeConvert_Dss(PageQueryOptions);
             }
         }
         private Dictionary<string, string> QueryListDict { get; set; } = new Dictionary<string, string>();
 
 
-        public bool ActiveQueryOptions { get; set; }
-
         public string PageAction { get; set; } = "";
 
         public string PageController { get; set; } = "";
 
-        public string PageStyleClass { get; set; } = "pagination";
+        //public string PageStyleClass { get; set; } = "pagination";
+
+        public string TagPagination { get; set; } = "nav";
+
+        public string TagPageGroup { get; set; } = "ul";
+        public string AttrsPageGroup { get; set; } = "";
+        public Dictionary<string, string> AttrsPageGroupDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageGroup);
+            }
+        }
+
+        public string TagPageList { get; set; } = "li";
+        public string AttrsPageList { get; set; }
+        public Dictionary<string, string> AttrsPageListDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageList);
+            }
+        }
+
+        public string TagPageLink { get; set; } = "a";
+        public string AttrsPageLink { get; set; }
+        public Dictionary<string, string> AttrsPageLinkDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageLink);
+            }
+        }
+
+        public string TagPageIcon { get; set; } = "span";
+        public string AttrsPageIcon { get; set; }
+        public Dictionary<string, string> AttrsPageIconDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageIcon);
+            }
+        }
+
+        public string AttrsPageFirst { get; set; }
+        public Dictionary<string, string> AttrsPageFirstDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageFirst);
+            }
+        }
+
+        public string AttrsPageLast { get; set; }
+        public Dictionary<string, string> AttrsPageLastDict
+        {
+            get
+            {
+                return JsonDeserialize.JsonDeserializeConvert_Dss(AttrsPageFirst);
+            }
+        }
+
 
         public string PageActiveClass { get; set; } = "active";
 
@@ -113,10 +171,6 @@ namespace PaginationTagHelper
 
         public bool PageExchangeNextLastBtn { get; set; }
 
-        public bool ActivePagination { get; set; }
-
-
-
         public override void Process(
             TagHelperContext context, TagHelperOutput output)
         {
@@ -126,12 +180,32 @@ namespace PaginationTagHelper
             }
 
             // <ul class="pagination"></ul>
-            TagBuilder ul = new TagBuilder("ul");
-            ul.AddCssClass(PageStyleClass);
+            TagBuilder ul = new TagBuilder(TagPageGroup);
+            // Set ul default class
+            ul.Attributes["class"] = "pagination";
+            HtmlAttributesHelper.AddAttributes(ul, AttrsPageGroupDict);
 
             // Show Middle Page Button
             for (int i = 1; i <= TotalPages; ++i)
             {
+                var originPageList = AttrsPageList;
+                if (!String.IsNullOrWhiteSpace(AttrsPageList))
+                {
+                    AttrsPageList = AttrsPageList.Replace("*", i.ToString());
+                }
+
+                var originPageLink = AttrsPageLink;
+                if (!String.IsNullOrWhiteSpace(AttrsPageLink))
+                {
+                    AttrsPageLink = AttrsPageLink.Replace("*", i.ToString());
+                }
+
+                var originPageIcon = AttrsPageIcon;
+                if (!String.IsNullOrWhiteSpace(AttrsPageLink))
+                {
+                    AttrsPageIcon = AttrsPageIcon.Replace("*", i.ToString());
+                }
+
 
                 TagBuilder list_li = PageButton(
                     has_link: true,
@@ -140,6 +214,13 @@ namespace PaginationTagHelper
                     is_disabled: false,
                     active_page: i == CurrentPage);
 
+                if (AttrsPageListDict.Count != 0)
+                {
+
+                    HtmlAttributesHelper.AddAttributes(
+                        list_li, AttrsPageListDict);
+                }
+
                 TagBuilder first_li = PageButton(
                     has_link: CurrentPage > 1,
                     page_action: i,
@@ -147,12 +228,24 @@ namespace PaginationTagHelper
                     is_disabled: CurrentPage == 1,
                     active_page: false);
 
+                if (AttrsPageFirstDict.Count != 0)
+                {
+                    HtmlAttributesHelper.AddAttributes(
+                        first_li, AttrsPageFirstDict);
+                }
+
                 TagBuilder last_li = PageButton(
                     has_link: CurrentPage < TotalPages,
                     page_action: i,
                     icon: PageLastIcon,
                     is_disabled: CurrentPage == TotalPages,
                     active_page: false);
+
+                if (AttrsPageLastDict.Count != 0)
+                {
+                    HtmlAttributesHelper.AddAttributes(
+                        last_li, AttrsPageLastDict);
+                }
 
                 TagBuilder dot_li = PageButton(
                     has_link: false,
@@ -220,9 +313,7 @@ namespace PaginationTagHelper
                             ul.InnerHtml.AppendHtml(dot_li);
                         }
                     }
-
                 }
-
 
                 /*-----------------------Middle Page Button-------------------------*/
 
@@ -324,12 +415,15 @@ namespace PaginationTagHelper
 
                         ul.InnerHtml.AppendHtml(next_li);
                     }
+
+                    AttrsPageList = originPageList;
+                    AttrsPageLink = originPageLink;
+                    AttrsPageIcon = originPageIcon;
                 }
 
             }
 
-
-            output.TagName = "nav";
+            output.TagName = TagPagination;
             output.TagMode = TagMode.StartTagAndEndTag;
 
             output.Content.SetHtmlContent(ul);
@@ -341,8 +435,9 @@ namespace PaginationTagHelper
         // <span aria-hidden="true">{{ icon  }}</span>
         public TagBuilder PageIcon(string icon)
         {
-            TagBuilder span = new TagBuilder("span");
-            span.MergeAttribute("aria-hidden", "true");
+            TagBuilder span = new TagBuilder(TagPageIcon);
+            span.Attributes["aria-hidden"] = "true";
+            HtmlAttributesHelper.AddAttributes(span, AttrsPageIconDict);
             span.InnerHtml.AppendHtml(icon);
             return span;
         }
@@ -353,39 +448,35 @@ namespace PaginationTagHelper
             TagBuilder a,
             int page_action)
         {
-            if (String.IsNullOrWhiteSpace(PageController))
+            if (!String.IsNullOrEmpty(PageQueryOptions))
             {
-                if (!String.IsNullOrEmpty(PageQueryList))
+                foreach (var item in QueryOptions)
                 {
-                    foreach (var item in QueryOptions)
+                    try
                     {
                         QueryListDict[item.Key] = item.Value;
                     }
-                }
+                    catch (ArgumentException)
+                    {
 
-                QueryListDict[CurrentPageParameter] = page_action.ToString();
+                    }
+                }
+            }
+
+            QueryListDict[CurrentPageParameter] = page_action.ToString();
+
+            if (String.IsNullOrWhiteSpace(PageController))
+            {
+
                 a.Attributes["href"] = urlHelper.Action(
                      PageAction, QueryListDict);
             }
             else
             {
-
-                if (!String.IsNullOrEmpty(PageQueryList))
-                {
-                    foreach (var item in QueryOptions)
-                    {
-                        QueryListDict[item.Key] = item.Value;
-                    }
-                }
-
-                QueryListDict[CurrentPageParameter] = page_action.ToString();
                 a.Attributes["href"] = urlHelper.Action(
                                      PageAction, PageController,
                                      QueryListDict);
             }
-
-
-
             return a;
         }
 
@@ -402,10 +493,11 @@ namespace PaginationTagHelper
             bool is_disabled,
             bool active_page)
         {
-            TagBuilder li = new TagBuilder("li");
-            TagBuilder a = new TagBuilder("a");
+            TagBuilder li = new TagBuilder(TagPageList);
+            TagBuilder a = new TagBuilder(TagPageLink);
 
             a.Attributes["aria-label"] = icon;
+            HtmlAttributesHelper.AddAttributes(a, AttrsPageLinkDict);
 
             if (has_link)
             {
@@ -417,13 +509,13 @@ namespace PaginationTagHelper
 
             if (is_disabled)
             {
-                li.AddCssClass(PageDisableClass);
+                li.Attributes["class"] = PageDisableClass;
             }
 
             if (active_page)
             {
-                a.AddCssClass(PageActiveClass);
-                li.AddCssClass(PageActiveClass);
+                a.Attributes["class"] = PageActiveClass;
+                li.Attributes["class"] = PageActiveClass;
             }
 
             return li;

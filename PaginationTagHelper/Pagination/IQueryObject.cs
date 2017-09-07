@@ -1,4 +1,4 @@
-﻿namespace PaginationTagHelper.Querying
+﻿namespace PaginationTagHelper.Pagination
 {
     public interface IQueryObject
     {
@@ -6,6 +6,5 @@
         string SearchItem { get; set; }
         string SortBy { get; set; }
         bool IsSortDescending { get; set; }
-        bool ShowAll { get; set; }
     }
 }

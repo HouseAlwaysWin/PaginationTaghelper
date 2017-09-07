@@ -21,9 +21,7 @@
 
 
 <br />
-<pagination total-items="@Model.TotalItems"
-            page-action="DefaultQuery">
-</pagination>
+
 
 <div class="bg-primary panel-body">
     <h4>Customers</h4>
@@ -44,7 +42,7 @@
                                                          searchby = Model.SearchBy,
                                                          searchItem= Model.SearchItem,
                                                          sortby = "Id",
-                                                         IsSortAscending = true
+                                                         IsSortDescending = true
                                                      })">
 
                         <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
@@ -59,7 +57,7 @@
                                     searchby = Model.SearchBy,
                                     searchItem = Model.SearchItem,
                                     sortby = "Id",
-                                    IsSortAscending = false
+                                    IsSortDescending = false
                                 })">
 
                         <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
@@ -75,7 +73,7 @@
                                                   {
                                                       page = Model.Page,
                                                       sortby = "Name",
-                                                      IsSortAscending = true,
+                                                      IsSortDescending = true,
                                                       searchby = Model.SearchBy,
                                                       searchItem = Model.SearchItem
                                                   })">
@@ -88,7 +86,7 @@
                             {
                                 page = Model.Page,
                                 sortby = "Name",
-                                IsSortAscending = false,
+                                IsSortDescending = false,
                                 searchby = Model.SearchBy,
                                 searchItem = Model.SearchItem
                             })">
@@ -130,5 +128,9 @@
 
 
 <pagination total-items="@Model.TotalItems"
-            page-action="DefaultQuery">
+            current-page="@Model.Page"
+            page-action="DefaultQuery"
+            page-controller="Home"
+            page-query-options="@Model.QueryOptions">
+
 </pagination>

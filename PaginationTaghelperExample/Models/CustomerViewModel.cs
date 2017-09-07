@@ -1,5 +1,4 @@
 ﻿using PaginationTagHelper.Pagination;
-using PaginationTagHelper.Querying;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +14,11 @@ namespace PaginationTaghelperExample.Models
         public string SortBy { get; set; }
         public bool IsSortDescending { get; set; }
         public bool ShowAll { get; set; }
-        public int Page { get; set; }
+        public int Page { get; set; } = 1;
         public int TotalItems { get; set; }
         public int ItemPerPage { get; set; }
         public IQueryable<Customer> Items { get; set; }
         public string QueryOptions { get; set; }
-        
+
     }
 }
