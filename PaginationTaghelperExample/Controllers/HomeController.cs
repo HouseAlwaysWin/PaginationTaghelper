@@ -27,20 +27,22 @@ namespace PaginationTaghelperExample.Controllers
         {
             var query = DbContext.Customer.AsQueryable();
 
-            query = query.ToSearchByList(model.SearchBy, model.SearchItem);
-            query = query.ToOrderByList(model.SortBy, model.IsSortDescending);
+            query = query.ToSearchByList(model.SearchType, model.SearchItem);
+            query = query.ToOrderByList(model.SortType, model.IsSortDescending);
 
             // Count total Items before pagination
             int totalItems = query.Count();
 
-            query = query.ToPageList(model.Page, 8);
+            model.ItemPerPage = 8;
+
+            query = query.ToPageList(model.Page, model.ItemPerPage);
 
             var result = new CustomerViewModel
             {
-                SearchBy = model.SearchBy,
+                SearchType = model.SearchType,
                 SearchItem = model.SearchItem,
                 IsSortDescending = model.IsSortDescending,
-                SortBy = model.SortBy,
+                SortType = model.SortType,
 
                 Page = model.Page,
                 ItemPerPage = model.ItemPerPage,
@@ -57,8 +59,8 @@ namespace PaginationTaghelperExample.Controllers
         {
             var query = DbContext.Customer.AsQueryable();
 
-            query = query.ToSearchByList(model.SearchBy, model.SearchItem);
-            query = query.ToOrderByList(model.SortBy, model.IsSortDescending);
+            query = query.ToSearchByList(model.SearchType, model.SearchItem);
+            query = query.ToOrderByList(model.SortType, model.IsSortDescending);
 
             int totalItems = query.Count();
 
@@ -68,8 +70,8 @@ namespace PaginationTaghelperExample.Controllers
             Dictionary<string, string> queryOptionsDict = new Dictionary<string, string>
             {
                 ["SearchItem"] = model.SearchItem,
-                ["SearchBy"] = model.SearchBy,
-                ["SortBy"] = model.SortBy,
+                ["SearchType"] = model.SearchType,
+                ["SortType"] = model.SortType,
                 ["IsSortDescending"] = model.IsSortDescending.ToString()
             };
 
@@ -78,10 +80,10 @@ namespace PaginationTaghelperExample.Controllers
 
             var result = new CustomerViewModel
             {
-                SearchBy = model.SearchBy,
+                SearchType = model.SearchType,
                 SearchItem = model.SearchItem,
                 IsSortDescending = model.IsSortDescending,
-                SortBy = model.SortBy,
+                SortType = model.SortType,
                 QueryOptions = queryOptions,
 
                 Page = model.Page,

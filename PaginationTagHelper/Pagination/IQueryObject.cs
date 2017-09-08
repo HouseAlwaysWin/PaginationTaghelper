@@ -2,9 +2,9 @@
 {
     public interface IQueryObject
     {
-        string SearchBy { get; set; }
+        string SearchType { get; set; }
         string SearchItem { get; set; }
-        string SortBy { get; set; }
+        string SortType { get; set; }
         bool IsSortDescending { get; set; }
     }
 }

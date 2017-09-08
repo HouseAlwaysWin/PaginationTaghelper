@@ -5,7 +5,7 @@
 
 <form asp-controller="Home" asp-action="PageWithQuery" method="get">
     <div class="input-group">
-        <select name="searchby" class="selectpicker" data-width="5%" data-style="btn-success">
+        <select name="searchtype" class="selectpicker" data-width="5%" data-style="btn-success">
             <option value="Id">Id</option>
             <option value="Name">Name</option>
         </select>
@@ -45,9 +45,9 @@
                                  new
                                  {
                                      page = Model.Page,
-                                     searchby = Model.SearchBy,
+                                     searchtype = Model.SearchType,
                                      searchItem = Model.SearchItem,
-                                     sortby = "Id",
+                                     sorttype = "Id",
                                      IsSortDescending = false
                                  })">
 
@@ -65,9 +65,9 @@
             new
             {
                 page = Model.Page,
-                searchby = Model.SearchBy,
+                searchtype = Model.SearchType,
                 searchItem = Model.SearchItem,
-                sortby = "Id",
+                sorttype = "Id",
                 IsSortDescending = true
             })">
                         <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
@@ -84,9 +84,9 @@
                               new
                               {
                                   page = Model.Page,
-                                  sortby = "Name",
+                                  sorttype = "Name",
                                   IsSortDescending = false,
-                                  searchby = Model.SearchBy,
+                                  searchtype = Model.SearchType,
                                   searchItem = Model.SearchItem
                               })">
                         <span class="glyphicon glyphicon-sort-by-alphabet-alt" aria-hidden="true"></span>
@@ -97,9 +97,9 @@
                     <a href="@Url.Action("PageWithQuery", new
                         {
                             page = Model.Page,
-                            sortby = "Name",
+                            sorttype = "Name",
                             IsSortDescending = true,
-                            searchby = Model.SearchBy,
+                            searchtype = Model.SearchType,
                             searchItem = Model.SearchItem
                         })">
                         <span class="glyphicon glyphicon-sort-by-alphabet" aria-hidden="true"></span>
@@ -143,11 +143,11 @@
             item-per-page="@Model.ItemPerPage"
             current-page="@Model.Page"
             page-action="PageWithQuery"
-            page-query-options='{
-                SearchItem:"@Model.SearchItem" ,
-                searchby:"@Model.SearchBy",
-                sortby:"@Model.SortBy",
-                issortdescending:"@Model.IsSortDescending"}'>
+            page-query-options="{
+                SearchItem:'@Model.SearchItem' ,
+                searchtype:'@Model.SearchType',
+                sorttype:'@Model.SortType',
+                issortdescending:'@Model.IsSortDescending'}">
 </pagination>
 
 <!-- Pagination with attribute for each one-->
@@ -155,59 +155,59 @@
             item-per-page="@Model.ItemPerPage"
             current-page="@Model.Page"
             page-action="PageWithQuery"
-            attrs-page-first='{
-                class:"first page "
-            }'
-            attrs-page-last='{
-                class:"last page"
-            }'
-            attrs-page-previous='{
-                class:"previous page"
-            }'
-            attrs-page-next='{
-                class:"next page"
-            }'
-            attrs-page-first-link='{
-                style:"color:red;"
-            }'
-            attrs-page-last-link='{
-                style:"color:gray;"
-            }'
-            attrs-page-previous-link='{
-                style:"color:pink;"
-            }'
-            attrs-page-next-link='{
-                style:"color:purple;"
-            }'
-            attrs-page-first-icon='{
-                style:"color:blue;"
-            }'
-            attrs-page-last-icon='{
-                style:"color:green;"
-            }'
-            attrs-page-previous-icon='{
-                style:"color:black;"
-            }'
-            attrs-page-next-icon='{
-                style:"color:white;"
-            }'
-            attrs-page-between='{
-                Id:"between icon"
-            }'
-            attrs-page-between-icon='{
-                style:"color:red;"
-            }'
-            attrs-page-link='{
-                style:"color:yellow;",
-                Id:"link*"
-            }'
+            attrs-page-first="{
+                class:'first page'
+            }"
+            attrs-page-last="{
+                class:'last page'
+            }"
+            attrs-page-previous="{
+                class:'previous page'
+            }"
+            attrs-page-next="{
+                class:'next page'
+            }"
+            attrs-page-first-link="{
+                style:'color:red;'
+            }"
+            attrs-page-last-link="{
+                style:'color:gray;'
+            }"
+            attrs-page-previous-link="{
+                style:'color:pink;'
+            }"
+            attrs-page-next-link="{
+                style:'color:purple;'
+            }"
+            attrs-page-first-icon="{
+                style:'color:blue;'
+            }"
+            attrs-page-last-icon="{
+                style:'color:green;'
+            }"
+            attrs-page-previous-icon="{
+                style:'color:black;'
+            }"
+            attrs-page-next-icon="{
+                style:'color:white;'
+            }"
+            attrs-page-between="{
+                Id:'between icon'
+            }"
+            attrs-page-between-icon="{
+                style:'color:red;'
+            }"
+            attrs-page-link="{
+                style:'color:yellow;',
+                Id:'link*'
+            }"
 
-            attrs-page-icon='{
-                style:"color:green;"
-            }'
-            page-query-options='{
-                SearchItem:"@Model.SearchItem" ,
-                searchby:"@Model.SearchBy",
-                sortby:"@Model.SortBy",
-                issortdescending:"@Model.IsSortDescending"}'>
+            attrs-page-icon="{
+                style:'color:green;'
+            }"
+            page-query-options="{
+                SearchItem:'@Model.SearchItem' ,
+                searchby:'@Model.SearchType',
+                sortby:'@Model.SortType',
+                issortdescending:'@Model.IsSortDescending'}">
 </pagination>

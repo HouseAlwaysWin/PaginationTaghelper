@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.Routing;
 using System.Collections.Generic;
 using GenericTagHelper.MethodHelpers;
-using PaginationTagHelper.Pagination;
 
 namespace PaginationTagHelper
 {
@@ -79,7 +78,7 @@ namespace PaginationTagHelper
 
         public string TagPageGroup { get; set; } = "ul";
         public string AttrsPageGroup { get; set; } = "";
-        public Dictionary<string, string> AttrsPageGroupDict
+        private Dictionary<string, string> AttrsPageGroupDict
         {
             get
             {
@@ -89,7 +88,7 @@ namespace PaginationTagHelper
 
         public string TagPageList { get; set; } = "li";
         public string AttrsPageList { get; set; } = "";
-        public Dictionary<string, string> AttrsPageListDict
+        private Dictionary<string, string> AttrsPageListDict
         {
             get
             {
@@ -99,7 +98,7 @@ namespace PaginationTagHelper
 
         public string TagPageLink { get; set; } = "a";
         public string AttrsPageLink { get; set; } = "";
-        public Dictionary<string, string> AttrsPageLinkDict
+        private Dictionary<string, string> AttrsPageLinkDict
         {
             get
             {
@@ -278,9 +277,9 @@ namespace PaginationTagHelper
 
         public bool PageShowBetween { get; set; } = true;
 
-        public bool PageExchangePreviousFirstBtn { get; set; }
+        public bool PageSwapPreviousFirstBtn { get; set; }
 
-        public bool PageExchangeNextLastBtn { get; set; }
+        public bool PageSwapNextLastBtn { get; set; }
         #endregion
 
         public override void Process(
@@ -379,7 +378,7 @@ namespace PaginationTagHelper
                 /*-----------------------Show First and Previous Page Button-------------------------*/
 
                 // Show previous and first btn in different location
-                if (PageExchangePreviousFirstBtn)
+                if (PageSwapPreviousFirstBtn)
                 {
                     // Show First Page Btn
                     if (i == 1 && PageShowFirst)
@@ -493,7 +492,7 @@ namespace PaginationTagHelper
                 /*-----------------------Show Next And Last Page Button-------------------------*/
 
 
-                if (PageExchangeNextLastBtn)
+                if (PageSwapNextLastBtn)
                 {
                     // Show Next Page Btn 
                     if (i == TotalPages)

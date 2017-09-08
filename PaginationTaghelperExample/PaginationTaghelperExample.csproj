@@ -22,4 +22,10 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Packages\PaginationTaghelper.1.2.2.nupkg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
