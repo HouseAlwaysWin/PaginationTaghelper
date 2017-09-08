@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>PaginationTaghelper</id>
+    <version>1.2.0</version>
+    <title>PaginationTagHelper</title>
+    <authors>Martin Wang</authors>
+    <owners>Martin Wang</owners>
+    <licenseUrl>https://raw.githubusercontent.com/HouseAlwaysWin/PaginationTaghelper/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/HouseAlwaysWin/PaginationTaghelper</projectUrl>
+    <iconUrl>https://nuget.org/Content/gallery/img/default-package-icon.svg</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PaginationTagHelper give you a easy way to handle your pagination</description>
+    <releaseNotes>
+      1.Update all properites from previous version.
+      2.Add new properties function to handle your html attributes.
+      3.Update Extension method for more easy way to be used.
+      4.Library is use .netstandard 1.6 or above now.
+    </releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>Pagination TagHelper Razor</tags>
+    <dependencies>
+      <dependency id="NETStandard.Library" version="1.6.0" />
+      <dependency id="Microsoft.AspNetCore.Mvc" version="1.0.0" />
+      <dependency id="Microsoft.AspNetCore.Razor" version="1.0.0"/>
+      <dependency id="System.Linq.Queryable" version="4.3.0"/>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="lib/netstandard1.6/PaginationTagHelper.dll" target="lib\netstandard1.6" />
+    <file src="lib/netstandard2.0/PaginationTagHelper.dll" target="lib\netstandard2.0" />
+  </files>
+</package>
