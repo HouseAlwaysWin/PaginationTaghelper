@@ -118,18 +118,18 @@ You want to add class="form-control" to all page link
 the html will be like this:
 
 ```html
-attrs-page-link="
+attrs-page-link="{
   class:'form-control'
-"
+}"
 ```
 
 You can also use "\*" to do the number of sequence in your attribute.
 <h4>For example:</h4>
 
 ```html
-attrs-page-list="
+attrs-page-list="{
   Id:'agelink*'
-"
+}"
 ```
 
 Will generate list id like this...
