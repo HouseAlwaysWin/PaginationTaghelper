@@ -114,16 +114,16 @@ Attribute property are all start with <strong>attrs-page-*.</strong>
 <br/>
 The attribute's contents are all use json format.
 <h5>For Example</h5>
-You want to add class="form-control" to attrs-page-link
+You want to add class="form-control" to all page link
 the html will be like this:
 
 ```html
 attrs-page-link="
-  class:'frm-control'
+  class:'form-control'
 "
 ```
 
-You can use "\*" to do the numbers of sequence in your attribute.
+You can also use "\*" to do the number of sequence in your attribute.
 <h4>For example:</h4>
 
 ```html
