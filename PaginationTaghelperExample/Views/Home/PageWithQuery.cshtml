@@ -3,8 +3,7 @@
 <br />
 
 
-<form asp-controller="Home" asp-action="PageWithQuery" method="get">
-    <div class="input-group">
+<form asp-controller="Home" asp-action="PageWithQuery" method="get" class="input-group">
         <select name="searchtype" class="selectpicker" data-width="5%" data-style="btn-success">
             <option value="Id">Id</option>
             <option value="Name">Name</option>
@@ -15,7 +14,6 @@
                 <span class="glyphicon glyphicon-search"></span>
             </button>
         </span>
-    </div>
 </form>
 
 
@@ -201,7 +199,6 @@
                 style:'color:yellow;',
                 Id:'link*'
             }"
-
             attrs-page-icon="{
                 style:'color:green;'
             }"

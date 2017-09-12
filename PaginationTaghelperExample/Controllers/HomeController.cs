@@ -77,7 +77,6 @@ namespace PaginationTaghelperExample.Controllers
 
             var queryOptions = JsonConvert.SerializeObject(queryOptionsDict);
 
-
             var result = new CustomerViewModel
             {
                 SearchType = model.SearchType,
