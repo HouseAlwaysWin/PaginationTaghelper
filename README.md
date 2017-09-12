@@ -1,5 +1,7 @@
 # PaginationTaghelper
 
+<h5>Current Version: 1.2.0</h5>
+
 <h2>Requirement</h2>
 .NetStandard 1.6 or above
 <h2>Installation</h3>
@@ -112,22 +114,22 @@ Attribute property are all start with <strong>attrs-page-*.</strong>
 <br/>
 The attribute's contents are all use json format.
 <h5>For Example</h5>
-You want to add class="form-control" to attrs-page-link
+You want to add class="form-control" to all page link
 the html will be like this:
 
 ```html
-attrs-page-link='{
-  class:"form-control"
-'}
+attrs-page-link="{
+  class:'form-control'
+}"
 ```
 
-You can use "\*" to do the numbers of sequence in your attribute.
+You can also use "\*" to do the number of sequence in your attribute.
 <h4>For example:</h4>
 
 ```html
-attrs-page-list='{
-  Id:"pagelink*"
-'}
+attrs-page-list="{
+  Id:'agelink*'
+}"
 ```
 
 Will generate list id like this...
